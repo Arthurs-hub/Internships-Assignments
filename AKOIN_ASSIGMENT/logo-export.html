@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDR Logo Export Tool</title>
+    <style>
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #FF6B35;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .logo-container {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .logo-container h2 {
+            color: #0A0A0A;
+            margin-bottom: 20px;
+        }
+        .logo-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .logo-display.dark {
+            background: #0A0A0A;
+        }
+        button {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #FF8C42;
+            transform: translateY(-2px);
+        }
+        .instructions {
+            background: #FFF5F2;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #FF6B35;
+            margin-top: 30px;
+        }
+        .instructions h3 {
+            color: #FF6B35;
+            margin-top: 0;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 IDR Logo Export Tool</h1>
+
+    <div class="logo-container">
+        <h2>Icon-Only Logo (200x200)</h2>
+        <div class="logo-display">
+            <img id="iconLogo" src="logo-icon.svg" alt="IDR Icon Logo" width="200" height="200">
+        </div>
+        <div class="logo-display dark">
+            <img src="logo-icon.svg" alt="IDR Icon Logo" width="200" height="200">
+        </div>
+        <button onclick="downloadPNG('iconLogo', 'idr-logo-icon.png', 200, 200)">Download PNG (200x200)</button>
+        <button onclick="downloadPNG('iconLogo', 'idr-logo-icon-512.png', 512, 512)">Download PNG (512x512)</button>
+        <button onclick="downloadPNG('iconLogo', 'idr-logo-icon-1024.png', 1024, 1024)">Download PNG (1024x1024)</button>
+    </div>
+
+    <div class="logo-container">
+        <h2>Full Logo with Text (800x200)</h2>
+        <div class="logo-display">
+            <img id="fullLogo" src="logo-full.svg" alt="IDR Full Logo" width="800" height="200">
+        </div>
+        <div class="logo-display dark">
+            <img src="logo-full.svg" alt="IDR Full Logo" width="800" height="200">
+        </div>
+        <button onclick="downloadPNG('fullLogo', 'idr-logo-full.png', 800, 200)">Download PNG (800x200)</button>
+        <button onclick="downloadPNG('fullLogo', 'idr-logo-full-1600.png', 1600, 400)">Download PNG (1600x400)</button>
+        <button onclick="downloadPNG('fullLogo', 'idr-logo-full-2400.png', 2400, 600)">Download PNG (2400x600)</button>
+    </div>
+
+    <div class="instructions">
+        <h3>📝 How to Export Logos to PNG</h3>
+        <ol>
+            <li>Open this file (<code>logo-export.html</code>) in your web browser</li>
+            <li>Click any "Download PNG" button to export the logo in that size</li>
+            <li>The PNG file will be downloaded automatically to your Downloads folder</li>
+            <li>Use different sizes for different purposes:
+                <ul>
+                    <li><strong>200x200 / 512x512:</strong> Favicons, app icons</li>
+                    <li><strong>1024x1024:</strong> High-resolution icons, social media</li>
+                    <li><strong>800x200:</strong> Website headers, email signatures</li>
+                    <li><strong>1600x400 / 2400x600:</strong> High-DPI displays, print materials</li>
+                </ul>
+            </li>
+        </ol>
+        <p><strong>Alternative Method:</strong> Right-click on any logo above and select "Save Image As..." to save the SVG file directly.</p>
+    </div>
+
+    <script>
+        async function downloadPNG(imgId, filename, width, height) {
+            try {
+                const img = document.getElementById(imgId);
+                const svgUrl = img.src;
+                
+                // Fetch the SVG content
+                const response = await fetch(svgUrl);
+                const svgText = await response.text();
+                
+                // Create blob from SVG text
+                const svgBlob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+                const url = URL.createObjectURL(svgBlob);
+                
+                // Create canvas
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                
+                // Create image from blob
+                const svgImg = new Image();
+                svgImg.onload = function() {
+                    // Fill with white background
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, width, height);
+                    
+                    // Draw the image
+                    ctx.drawImage(svgImg, 0, 0, width, height);
+                    
+                    // Convert to PNG and download
+                    canvas.toBlob(function(blob) {
+                        const pngUrl = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = pngUrl;
+                        a.download = filename;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(pngUrl);
+                        URL.revokeObjectURL(url);
+                        
+                        alert('✅ ' + filename + ' downloaded successfully!');
+                    }, 'image/png');
+                };
+                
+                svgImg.onerror = function() {
+                    alert('❌ Error loading SVG. Please make sure all files are in the same folder.');
+                };
+                
+                svgImg.src = url;
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ Error: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html>

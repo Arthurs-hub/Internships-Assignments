@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDR Logo PNG Export - Simple Method</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #FF6B35;
+            text-align: center;
+        }
+        .section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .logo-preview {
+            text-align: center;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .logo-preview.dark {
+            background: #0A0A0A;
+        }
+        canvas {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            max-width: 100%;
+            height: auto;
+        }
+        button {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background: #FF8C42;
+            transform: translateY(-2px);
+        }
+        .instructions {
+            background: #FFF5F2;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #FF6B35;
+            margin: 20px 0;
+        }
+        .instructions h3 {
+            color: #FF6B35;
+            margin-top: 0;
+        }
+        .button-group {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .note {
+            background: #fffbea;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 IDR Logo PNG Export Tool</h1>
+
+    <div class="instructions">
+        <h3>📝 Instructions</h3>
+        <p><strong>Method 1 (Recommended):</strong> Right-click on any canvas below and select "Save Image As..." to save as PNG.</p>
+        <p><strong>Method 2:</strong> Click the "Download PNG" button below each logo.</p>
+        <p><strong>Method 3:</strong> Use the SVG files directly - they work everywhere and scale perfectly!</p>
+    </div>
+
+    <div class="section">
+        <h2>Icon-Only Logo</h2>
+        <div class="logo-preview">
+            <h3>200x200 (Standard - Favicons, Mobile)</h3>
+            <canvas id="icon200" width="200" height="200"></canvas>
+            <div class="button-group">
+                <button onclick="downloadCanvas('icon200', 'idr-logo-icon-200.png')">Download PNG</button>
+            </div>
+        </div>
+        
+        <div class="logo-preview">
+            <h3>512x512 (High Resolution - App Icons)</h3>
+            <canvas id="icon512" width="512" height="512"></canvas>
+            <div class="button-group">
+                <button onclick="downloadCanvas('icon512', 'idr-logo-icon-512.png')">Download PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Full Logo with Text</h2>
+        <div class="logo-preview">
+            <h3>800x200 (Standard - Website Headers)</h3>
+            <canvas id="full800" width="800" height="200"></canvas>
+            <div class="button-group">
+                <button onclick="downloadCanvas('full800', 'idr-logo-full-800.png')">Download PNG</button>
+            </div>
+        </div>
+        
+        <div class="logo-preview">
+            <h3>1600x400 (High Resolution - Retina Displays)</h3>
+            <p style="color: #666; font-size: 14px; margin-bottom: 10px;">Scroll horizontally to see full size →</p>
+            <canvas id="full1600" width="1600" height="400"></canvas>
+            <div class="button-group">
+                <button onclick="downloadCanvas('full1600', 'idr-logo-full-1600.png')">Download PNG</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>💡 Tip:</strong> SVG files (logo-icon.svg and logo-full.svg) are vector graphics that scale perfectly to any size. 
+        You can use them directly in most modern applications without converting to PNG!
+    </div>
+
+    <script>
+        // SVG content for icon logo
+        const iconSVG = `
+            <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="cubeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF8C42;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="url(#cubeGradient)" opacity="0.15"/>
+                <path d="M100 20 L170 60 L100 100 Z" fill="url(#cubeGradient)"/>
+                <path d="M100 100 L170 60 L170 140 L100 180 Z" fill="#FF6B35" opacity="0.75"/>
+                <path d="M100 100 L30 60 L30 140 L100 180 Z" fill="#FF6B35" opacity="0.55"/>
+                <line x1="100" y1="100" x2="100" y2="180" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="170" y2="60" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+                <line x1="100" y1="100" x2="30" y2="60" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+        `;
+
+        // SVG content for full logo
+        const fullSVG = `
+            <svg width="800" height="200" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="cubeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#FF8C42;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g transform="translate(20, 0)">
+                    <path d="M100 20 L170 60 L170 140 L100 180 L30 140 L30 60 Z" fill="url(#cubeGradient)" opacity="0.15"/>
+                    <path d="M100 20 L170 60 L100 100 Z" fill="url(#cubeGradient)"/>
+                    <path d="M100 100 L170 60 L170 140 L100 180 Z" fill="#FF6B35" opacity="0.75"/>
+                    <path d="M100 100 L30 60 L30 140 L100 180 Z" fill="#FF6B35" opacity="0.55"/>
+                    <line x1="100" y1="100" x2="100" y2="180" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="100" y1="100" x2="170" y2="60" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+                    <line x1="100" y1="100" x2="30" y2="60" stroke="#0A0A0A" stroke-width="4" stroke-linecap="round"/>
+                </g>
+                <g transform="translate(220, 0)">
+                    <text x="0" y="80" font-family="Inter, Arial, sans-serif" font-size="48" font-weight="800" fill="#0A0A0A" letter-spacing="-1">Institute of</text>
+                    <text x="0" y="140" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="800" fill="#FF6B35" letter-spacing="-1">Digital Risk</text>
+                </g>
+            </svg>
+        `;
+
+        // Function to draw SVG on canvas
+        function drawSVGOnCanvas(canvasId, svgContent, scale = 1) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            
+            // Fill white background
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Create image from SVG
+            const img = new Image();
+            const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                URL.revokeObjectURL(url);
+            };
+            
+            img.src = url;
+        }
+
+        // Function to download canvas as PNG
+        function downloadCanvas(canvasId, filename) {
+            const canvas = document.getElementById(canvasId);
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                alert('✅ ' + filename + ' downloaded successfully!');
+            }, 'image/png');
+        }
+
+        // Draw all logos on page load
+        window.onload = function() {
+            drawSVGOnCanvas('icon200', iconSVG);
+            drawSVGOnCanvas('icon512', iconSVG);
+            drawSVGOnCanvas('full800', fullSVG);
+            drawSVGOnCanvas('full1600', fullSVG);
+        };
+    </script>
+</body>
+</html>
