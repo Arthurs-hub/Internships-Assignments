@@ -4,7 +4,7 @@ This repository contains all my internship assignments from various platforms in
 
 ## 📁 Projects
 
-### 1. AKOIN_ASSIGMENT - Institute of Digital Risk (IDR)
+### 1. AKOIN_ASSIGNMENT - Institute of Digital Risk (IDR)
 **Platform:** Internshala  
 **Type:** Web Design & Brand Identity  
 **Technologies:** HTML5, CSS3, JavaScript (Vanilla)
@@ -15,7 +15,7 @@ Complete brand identity and responsive website for the Institute of Digital Risk
 - Modern animations and interactions
 - Mobile-first design
 
-[View Project →](./AKOIN_ASSIGMENT/)
+[View Project →](./AKOIN_ASSIGNMENT/)
 
 ---
 

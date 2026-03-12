@@ -137,11 +137,7 @@ The design emphasizes IDR's unique position bridging academic research (UK unive
 - Energy
 - Telecommunications
 
-## 📄 License
-
-This project was created as part of an internship assignment for Internshala.
-
-## 👨‍💻 Development Notes
+## 📝 Development Notes
 
 - All code is vanilla (no frameworks or libraries except Google Fonts)
 - SVG logos are scalable to any size without quality loss

@@ -88,20 +88,6 @@ The website automatically adapts to:
 - Tablets (768px - 1199px)
 - Mobile phones (<768px)
 
-## 🎯 For Internshala Submission
-
-**What to submit:**
-1. All files in the AKOIN_ASSIGMENT folder
-2. Or create a ZIP file with all contents
-3. Include this Quick Start Guide
-
-**Highlights:**
-- ✅ All requirements met and exceeded
-- ✅ Modern, beautiful design
-- ✅ Fully functional and responsive
-- ✅ Clean, professional code
-- ✅ Complete documentation
-
 ## 💡 Tips
 
 1. **View the website:** Just double-click `index.html`
@@ -111,7 +97,7 @@ The website automatically adapts to:
 
 ## 🎉 Everything is Ready!
 
-Your project is complete and ready to submit. All deliverables are included with modern, professional design that exceeds the requirements.
+Your project is complete and ready to use. All deliverables are included with modern, professional design.
 
 ---
 
