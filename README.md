@@ -24,7 +24,20 @@ AI Systems project for Rayeva company.
 
 [View Project →](./Rayeva-AI-Systems)
 
-### 3. Celebrare - Photo Gallery
+### 3. Karopitch - Startup Pitch Landing Page
+**Type:** Frontend Web Application  
+**Technologies:** HTML5, CSS3, JavaScript (Vanilla)
+
+Modern responsive landing page for **Karo Pitch** — a platform connecting early-stage founders from India with investors through curated pitch events. Built from scratch without AI builders for maximum customization:
+- Hero section with gradient text, dual CTAs, and trust indicators
+- 4-step "How It Works" process with numbered cards
+- Startup category cards and featured startup profiles
+- Investor types showcase and social proof section
+- Fully responsive (mobile/tablet/desktop)
+
+[View Project →](./Karopitch)
+
+### 4. Celebrare - Photo Gallery
 **Type:** Frontend Web Application  
 **Technologies:** React, Vite, Tailwind CSS
 
