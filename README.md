@@ -37,6 +37,22 @@ Modern responsive landing page for **Karo Pitch** — a platform connecting earl
 
 [View Project →](./Karopitch)
 
+### 5. Primetrade - Task Manager API
+**Type:** Full-Stack Web Application  
+**Technologies:** Node.js, Express.js, PostgreSQL, JWT, bcrypt, Swagger, React 18, Vite
+
+Scalable REST API with JWT authentication, role-based access control, and a React frontend:
+- User registration & login with bcrypt password hashing
+- JWT-based authentication (7-day expiry)
+- Role-based access: `user` (own tasks only) vs `admin` (all tasks + user list)
+- Full CRUD for Tasks entity with input validation
+- API versioning (`/api/v1/`), global error handling
+- Swagger UI documentation
+- React frontend with protected routes, login/register/dashboard
+- Secure: parameterized queries, CORS restricted, Content-Type enforcement
+
+[View Project →](./Primetrade)
+
 ### 4. Celebrare - Photo Gallery
 **Type:** Frontend Web Application  
 **Technologies:** React, Vite, Tailwind CSS
