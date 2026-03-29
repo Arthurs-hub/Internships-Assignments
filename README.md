@@ -37,6 +37,19 @@ Modern responsive landing page for **Karo Pitch** — a platform connecting earl
 
 [View Project →](./Karopitch)
 
+### 4. Celebrare - Photo Gallery
+**Type:** Frontend Web Application  
+**Technologies:** React, Vite, Tailwind CSS
+
+Responsive photo gallery application featuring:
+- Real-time search functionality
+- Favourites with localStorage persistence
+- Custom React hooks
+- Performance optimization with useCallback and useMemo
+- Responsive grid layout (mobile/tablet/desktop)
+
+[View Project →](./Celebrare/photo-gallery)
+
 ### 5. Primetrade - Task Manager API
 **Type:** Full-Stack Web Application  
 **Technologies:** Node.js, Express.js, PostgreSQL, JWT, bcrypt, Swagger, React 18, Vite
@@ -52,19 +65,6 @@ Scalable REST API with JWT authentication, role-based access control, and a Reac
 - Secure: parameterized queries, CORS restricted, Content-Type enforcement
 
 [View Project →](./Primetrade)
-
-### 4. Celebrare - Photo Gallery
-**Type:** Frontend Web Application  
-**Technologies:** React, Vite, Tailwind CSS
-
-Responsive photo gallery application featuring:
-- Real-time search functionality
-- Favourites with localStorage persistence
-- Custom React hooks
-- Performance optimization with useCallback and useMemo
-- Responsive grid layout (mobile/tablet/desktop)
-
-[View Project →](./Celebrare/photo-gallery)
 
 ## 🎯 Purpose
 
