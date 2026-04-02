@@ -1,89 +1,143 @@
-# Assignment Projects Repository
+# Finance Backend API
 
-This repository contains assignment projects completed for various job applications and opportunities, showcasing web development skills and technical capabilities.
+A RESTful backend for a finance dashboard system built with **Laravel 12**, **Sanctum**, and **SQLite**.
 
-## 📁 Projects
+## Stack
 
-### 1. AKOIN_ASSIGNMENT - Institute of Digital Risk (IDR)
-**Type:** Web Design & Brand Identity  
-**Technologies:** HTML5, CSS3, JavaScript (Vanilla)
-
-Complete brand identity and responsive website for the Institute of Digital Risk (IDR), featuring:
-- Custom logo design (SVG)
-- Responsive single-page website
-- Modern animations and interactions
-- Mobile-first design
-
-[View Project →](./AKOIN_ASSIGNMENT)
-
-### 2. Rayeva-AI-Systems
-**Type:** AI/ML Project  
-**Technologies:** Python
-
-AI Systems project for Rayeva company.
-
-[View Project →](./Rayeva-AI-Systems)
-
-### 3. Karopitch - Startup Pitch Landing Page
-**Type:** Frontend Web Application  
-**Technologies:** HTML5, CSS3, JavaScript (Vanilla)
-
-Modern responsive landing page for **Karo Pitch** — a platform connecting early-stage founders from India with investors through curated pitch events. Built from scratch without AI builders for maximum customization:
-- Hero section with gradient text, dual CTAs, and trust indicators
-- 4-step "How It Works" process with numbered cards
-- Startup category cards and featured startup profiles
-- Investor types showcase and social proof section
-- Fully responsive (mobile/tablet/desktop)
-
-[View Project →](./Karopitch)
-
-### 4. Celebrare - Photo Gallery
-**Type:** Frontend Web Application  
-**Technologies:** React, Vite, Tailwind CSS
-
-Responsive photo gallery application featuring:
-- Real-time search functionality
-- Favourites with localStorage persistence
-- Custom React hooks
-- Performance optimization with useCallback and useMemo
-- Responsive grid layout (mobile/tablet/desktop)
-
-[View Project →](./Celebrare/photo-gallery)
-
-### 5. Primetrade - Task Manager API
-**Type:** Full-Stack Web Application  
-**Technologies:** Node.js, Express.js, PostgreSQL, JWT, bcrypt, Swagger, React 18, Vite
-
-Scalable REST API with JWT authentication, role-based access control, and a React frontend:
-- User registration & login with bcrypt password hashing
-- JWT-based authentication (7-day expiry)
-- Role-based access: `user` (own tasks only) vs `admin` (all tasks + user list)
-- Full CRUD for Tasks entity with input validation
-- API versioning (`/api/v1/`), global error handling
-- Swagger UI documentation
-- React frontend with protected routes, login/register/dashboard
-- Secure: parameterized queries, CORS restricted, Content-Type enforcement
-
-[View Project →](./Primetrade)
-
-## 🎯 Purpose
-
-This repository serves as a portfolio of assignment work, demonstrating:
-- Web development skills (Frontend & Full-stack)
-- Modern JavaScript frameworks (React)
-- Responsive design capabilities
-- Problem-solving abilities
-- Code quality and documentation
-- Performance optimization
-
-## 📫 Contact
-
-**Arthur Zelenco**
-
-- Email: arthurznc@gmail.com
-- LinkedIn: [zelenco-artur-042199362](https://linkedin.com/in/zelenco-artur-042199362)
-- GitHub: [@Arthurs-hub](https://github.com/Arthurs-hub)
+- **PHP 8.2** + **Laravel 12**
+- **Laravel Sanctum** — token-based authentication
+- **SQLite** — zero-config database
+- **Eloquent ORM** — data modeling
+- **Form Requests** — input validation
+- **API Resources** — response transformation
+- **Soft Deletes** — non-destructive record removal
 
 ---
 
-Each project folder contains its own detailed README with specific setup instructions and documentation.
+## Setup
+
+```bash
+git clone https://github.com/Arthurs-hub/Internships-Assignments.git
+cd Internships-Assignments/Zorvyn_assignment
+
+composer install
+
+cp .env.example .env
+php artisan key:generate
+
+php artisan migrate:fresh --seed
+
+php artisan serve
+```
+
+API is available at `http://localhost:8000/api`
+
+---
+
+## Roles
+
+| Role     | Permissions                                      |
+|----------|--------------------------------------------------|
+| viewer   | Read financial records                           |
+| analyst  | Read records + access dashboard analytics        |
+| admin    | Full access: manage records and users            |
+
+---
+
+## Test Accounts
+
+| Email                  | Password | Role     |
+|------------------------|----------|----------|
+| admin@example.com      | password | admin    |
+| analyst@example.com    | password | analyst  |
+| viewer@example.com     | password | viewer   |
+
+---
+
+## API Endpoints
+
+### Auth
+
+| Method | Endpoint        | Auth | Description          |
+|--------|-----------------|------|----------------------|
+| POST   | /api/register   | —    | Register new user    |
+| POST   | /api/login      | —    | Login, returns token |
+| POST   | /api/logout     | ✓    | Revoke current token |
+| GET    | /api/me         | ✓    | Current user info    |
+
+### Financial Records
+
+| Method | Endpoint                  | Role            | Description               |
+|--------|---------------------------|-----------------|---------------------------|
+| GET    | /api/records              | viewer+         | List with filters         |
+| GET    | /api/records/{id}         | viewer+         | Single record             |
+| POST   | /api/records              | admin           | Create record             |
+| PUT    | /api/records/{id}         | admin           | Update record             |
+| DELETE | /api/records/{id}         | admin           | Soft delete               |
+
+**Filters:** `?type=income&category=Salary&date_from=2025-01-01&date_to=2025-12-31&per_page=10`
+
+### Dashboard
+
+| Method | Endpoint                        | Role      | Description                     |
+|--------|---------------------------------|-----------|---------------------------------|
+| GET    | /api/dashboard/summary          | analyst+  | Total income, expenses, balance |
+| GET    | /api/dashboard/by-category      | analyst+  | Totals by category              |
+| GET    | /api/dashboard/monthly-trends   | analyst+  | Monthly trends                  |
+| GET    | /api/dashboard/recent-activity  | analyst+  | Last 10 transactions            |
+
+### User Management (admin only)
+
+| Method | Endpoint          | Description                      |
+|--------|-------------------|----------------------------------|
+| GET    | /api/users        | List all users                   |
+| GET    | /api/users/{id}   | Get user                         |
+| PUT    | /api/users/{id}   | Update role, status              |
+| DELETE | /api/users/{id}   | Deactivate user                  |
+
+---
+
+## Access Control
+
+Role enforcement via `RequireRole` middleware:
+
+- `viewer` — read records only
+- `analyst` — read records + dashboard
+- `admin` — full access
+- Inactive users are blocked regardless of role
+
+---
+
+## Data Model
+
+### users
+| Column     | Type    | Notes                    |
+|------------|---------|--------------------------|
+| id         | integer | Primary key              |
+| name       | string  |                          |
+| email      | string  | Unique                   |
+| password   | string  | Hashed                   |
+| role       | enum    | viewer / analyst / admin |
+| is_active  | boolean | Default true             |
+
+### financial_records
+| Column     | Type      | Notes              |
+|------------|-----------|--------------------|
+| id         | integer   | Primary key        |
+| user_id    | integer   | FK → users         |
+| amount     | decimal   | 15,2               |
+| type       | enum      | income / expense   |
+| category   | string    |                    |
+| date       | date      |                    |
+| notes      | text      | Nullable           |
+| deleted_at | timestamp | Soft delete        |
+
+---
+
+## Assumptions
+
+- Token-based auth via Sanctum (suitable for API clients)
+- User deletion = deactivation (data preserved)
+- Record deletion = soft delete (restorable)
+- SQLite used for zero-config local setup
+- Database seeded with 3 users and 30 financial records
