@@ -66,28 +66,11 @@ Scalable REST API with JWT authentication, role-based access control, and a Reac
 
 [View Project →](./Primetrade)
 
-### 6. Zorvyn - Finance Data Processing and Access Control Backend
-**Type:** Backend REST API  
-**Technologies:** PHP 8.2, Laravel 12, Sanctum, SQLite, Eloquent ORM
-
-Backend for a finance dashboard system with role-based access control:
-- JWT-like token authentication via Laravel Sanctum
-- Three roles: `viewer`, `analyst`, `admin` with enforced permissions
-- Full CRUD for financial records (income/expense) with filtering and pagination
-- Dashboard analytics: summary totals, category breakdown, monthly trends, recent activity
-- Soft deletes for records, user deactivation instead of deletion
-- Form Request validation, API Resources for response transformation
-- SQLite database, zero-config setup
-
-[View Project →](./Zorvyn_assignment)
-
 ## 🎯 Purpose
 
 This repository serves as a portfolio of assignment work, demonstrating:
 - Web development skills (Frontend & Full-stack)
 - Modern JavaScript frameworks (React)
-- Backend API design (PHP/Laravel, Node.js)
-- Authentication & authorization (JWT, Sanctum, RBAC)
 - Responsive design capabilities
 - Problem-solving abilities
 - Code quality and documentation
