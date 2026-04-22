@@ -1,0 +1,320 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f0f2f5;
+  color: #1a1a2e;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.app-header {
+  background: #1a1a2e;
+  padding: 0 32px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-icon { font-size: 22px; }
+
+.header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.header-sub {
+  font-size: 12px;
+  color: #8892b0;
+  margin-left: 4px;
+}
+
+.header-nav { display: flex; gap: 8px; }
+
+.nav-btn {
+  background: transparent;
+  border: 1px solid #2d3561;
+  color: #8892b0;
+  padding: 6px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover { border-color: #6c63ff; color: #fff; }
+
+.nav-btn.active {
+  background: #6c63ff;
+  border-color: #6c63ff;
+  color: #fff;
+}
+
+/* Main */
+.app-main {
+  flex: 1;
+  padding: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Selector */
+.selector-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.selector-row label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.selector-row select {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Profile header */
+.profile-header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2d3561 100%);
+  border-radius: 14px;
+  padding: 24px 28px;
+  color: #fff;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #6c63ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.profile-name { font-size: 22px; font-weight: 700; }
+.profile-meta { font-size: 13px; color: #8892b0; margin-top: 4px; }
+.profile-month { margin-left: auto; font-size: 13px; color: #8892b0; }
+
+/* Metrics grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.metric-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 16px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  border-top: 3px solid #e0e0e0;
+  transition: transform 0.15s;
+}
+
+.metric-card:hover { transform: translateY(-2px); }
+.metric-card.good { border-top-color: #22c55e; }
+.metric-card.ok   { border-top-color: #f59e0b; }
+.metric-card.warn { border-top-color: #ef4444; }
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1;
+}
+
+.metric-unit {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 4px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.status-dot.good { background: #22c55e; }
+.status-dot.ok   { background: #f59e0b; }
+.status-dot.warn { background: #ef4444; }
+
+/* Insights */
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+}
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.insight-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  display: grid;
+  grid-template-columns: 140px 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+  border-left: 4px solid #e0e0e0;
+}
+
+.insight-card.good { border-left-color: #22c55e; }
+.insight-card.ok   { border-left-color: #f59e0b; }
+.insight-card.warn { border-left-color: #ef4444; }
+
+.insight-metric-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.insight-value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.insight-value.good { color: #22c55e; }
+.insight-value.ok   { color: #f59e0b; }
+.insight-value.warn { color: #ef4444; }
+
+.insight-story-label, .insight-next-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+
+.insight-story-text { font-size: 13px; color: #444; line-height: 1.5; }
+
+.insight-next-text {
+  font-size: 13px;
+  color: #6c63ff;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* Chart section */
+.chart-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  margin-bottom: 28px;
+}
+
+/* Team table */
+.team-table-wrap {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.team-table th {
+  background: #f8f9fa;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  border-bottom: 1px solid #eee;
+}
+
+.team-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+}
+
+.team-table tr:last-child td { border-bottom: none; }
+.team-table tr:hover td { background: #fafafa; }
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge.good { background: #dcfce7; color: #16a34a; }
+.badge.ok   { background: #fef9c3; color: #ca8a04; }
+.badge.warn { background: #fee2e2; color: #dc2626; }
+
+/* Loading / error */
+.loading, .error {
+  text-align: center;
+  padding: 60px;
+  color: #888;
+  font-size: 15px;
+}
+
+.error { color: #ef4444; }

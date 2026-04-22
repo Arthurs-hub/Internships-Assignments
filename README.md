@@ -81,12 +81,25 @@ Backend for a finance dashboard system with role-based access control:
 
 [View Project →](./Zorvyn_assignment)
 
+### 7. TheProductWorks - Developer Productivity MVP
+**Type:** Full-Stack Web Application  
+**Technologies:** React.js, Python, FastAPI, pandas, Recharts
+
+Full-stack MVP that transforms raw engineering metrics into actionable developer insights:
+- IC Profile view: 5 productivity metrics (Lead Time, Cycle Time, Bug Rate, Deploy Frequency, PR Throughput) with health radar chart
+- Plain-English interpretation of each metric — "what it likely means" + one concrete next step
+- Team Summary view: bar charts comparing all developers, status table with Healthy / Watch / At Risk badges
+- FastAPI backend with pandas reading structured Excel data (Jira, PR, CI/CD, bug tables)
+- Status thresholds (good/ok/warn) with defensible logic per assignment spec
+
+[View Project →](./TheProductWorks_assignment)
+
 ## 🎯 Purpose
 
 This repository serves as a portfolio of assignment work, demonstrating:
 - Web development skills (Frontend & Full-stack)
 - Modern JavaScript frameworks (React)
-- Backend API design (PHP/Laravel, Node.js)
+- Backend API design (PHP/Laravel, Node.js, Python/FastAPI)
 - Authentication & authorization (JWT, Sanctum, RBAC)
 - Responsive design capabilities
 - Problem-solving abilities
