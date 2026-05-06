@@ -94,6 +94,20 @@ Full-stack MVP that transforms raw engineering metrics into actionable developer
 
 [View Project →](./TheProductWorks_assignment)
 
+### 8. Credex - AI Spend Audit
+**Type:** Full-Stack AI Audit Tool  
+**Technologies:** React, Next.js 15, TypeScript, Tailwind CSS, shadcn/ui, Anthropic API, Supabase, Resend
+
+Entrepreneurial MVP designed to help startups identify and eliminate AI tool overspend:
+- **Spend Input Form**: Multi-step form with tool-specific plan selection and `localStorage` persistence
+- **Audit Engine**: Hardcoded, defensible logic evaluating plan optimality, team size, and cheaper alternatives
+- **AI Summary**: Personalized audit insights generated via Anthropic API with robust fallback mechanisms
+- **Lead Capture**: Integration with Supabase for data storage and Resend for transactional email delivery
+- **Shareable Results**: Unique public URLs with dynamic Open Graph tags for optimized social sharing
+- **CI/CD**: GitHub Actions workflow for automated linting and unit testing (Jest)
+
+[View Project →](./Credex_assignment)
+
 ## 🎯 Purpose
 
 This repository serves as a portfolio of assignment work, demonstrating:
