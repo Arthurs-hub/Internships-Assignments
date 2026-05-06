@@ -7,7 +7,7 @@ graph TD
     Frontend -->|Persistence| LocalStorage[(Browser LocalStorage)]
     Frontend -->|Request Audit| AuditEngine[Audit Engine Logic]
     AuditEngine -->|Rule Evaluation| Results[Audit Results]
-    Frontend -->|Generate Summary| LLM[Anthropic API / Fallback]
+    Frontend -->|Generate Summary| LLM[Google Gemini API / Fallback]
     LLM -->|Personalized Text| Results
     Frontend -->|Lead Capture| Backend[Supabase / Postgres]
     Backend -->|Send Email| EmailService[Resend / SES]
@@ -27,7 +27,7 @@ graph TD
 - **Language**: TypeScript for type safety and maintainability.
 - **Styling**: Tailwind CSS + shadcn/ui for rapid, polished UI development.
 - **Database**: Supabase (Postgres) for easy lead storage and serverless functions.
-- **AI**: Anthropic API for personalized audit summaries.
+- **AI**: Google Gemini API for personalized audit summaries.
 - **Email**: Resend for transactional emails.
 
 ## Scalability

@@ -1,41 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
-import Anthropic from '@anthropic-ai/sdk';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { AuditReport } from '@/types';
 
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || '',
-});
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
 
 export async function POST(req: NextRequest) {
   try {
     const { auditData }: { auditData: AuditReport } = await req.json();
 
-    if (!process.env.ANTHROPIC_API_KEY) {
+    if (!process.env.GEMINI_API_KEY) {
+      console.warn('GEMINI_API_KEY is missing, using fallback summary');
       return NextResponse.json({ summary: generateFallbackSummary(auditData) });
     }
 
-    const response = await anthropic.messages.create({
-      model: 'claude-3-haiku-20240307',
-      max_tokens: 150,
-      messages: [
-        {
-          role: 'user',
-          content: `Generate a 100-word personalized summary for an AI spend audit. 
-          Total Monthly Savings: $${auditData.totalMonthlySavings}.
-          Total Annual Savings: $${auditData.totalAnnualSavings}.
-          Tools: ${auditData.recommendations.map((r) => r.tool).join(', ')}.
-          Focus on the biggest savings and the value of Credex credits. Tone: Professional, entrepreneurial.`,
-        },
-      ],
-    });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const summary = response.content[0].type === 'text' ? response.content[0].text : generateFallbackSummary(auditData);
+    const prompt = `Generate a 100-word personalized summary for an AI spend audit. 
+    Total Monthly Savings: $${auditData.totalMonthlySavings}.
+    Total Annual Savings: $${auditData.totalAnnualSavings}.
+    Tools: ${auditData.recommendations.map((r) => r.tool).join(', ')}.
+    Focus on the biggest savings and the value of Credex credits. Tone: Professional, entrepreneurial. 
+    Keep it strictly under 100 words.`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const summary = response.text() || generateFallbackSummary(auditData);
 
     return NextResponse.json({ summary });
   } catch (error) {
-    console.error('AI Summary Error:', error);
-    const data = await req.json();
-    return NextResponse.json({ summary: generateFallbackSummary(data.auditData) });
+    console.error('Gemini Summary Error:', error);
+    // Attempt to parse body again for fallback if possible
+    try {
+        const body = await req.json();
+        return NextResponse.json({ summary: generateFallbackSummary(body.auditData) });
+    } catch {
+        return NextResponse.json({ summary: "We've analyzed your AI spend and identified several high-impact savings opportunities through plan optimization and Credex credits." });
+    }
   }
 }
 
