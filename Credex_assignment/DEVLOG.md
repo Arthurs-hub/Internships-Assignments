@@ -6,10 +6,15 @@
 - Initialized Next.js project with TypeScript and Tailwind CSS.
 - Defined project structure and created initial documentation files.
 - Planned MVP features and architecture.
+- Implemented core Audit Engine logic and Spend Form.
+- Switched from Anthropic to Google Gemini API for free tier compatibility.
+- Resolved build errors related to missing environment variables.
+- Successfully deployed the application to Vercel.
 
 **What I learned:**
 - Next.js 15+ has some changes in configuration files (e.g., `next.config.ts`).
 - npm naming restrictions require lowercase project names when using `create-next-app`.
+- Vercel build process requires careful handling of optional environment variables for Supabase/AI clients.
 
 **Blockers / what I'm stuck on:**
 - None so far. Initial setup is complete.
