@@ -54,46 +54,6 @@ export default function AuditResults({ report }: { report: AuditReport }) {
     }
   };
 
-  const LeadFormFields = () => (
-    <div className="space-y-3 max-w-md mx-auto text-left">
-      <div>
-        <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
-        <Input 
-          placeholder="your@email.com" 
-          type="email"
-          required
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-2">
-        <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Company</label>
-          <Input 
-            placeholder="e.g. Acme Inc" 
-            value={company} 
-            onChange={(e) => setCompany(e.target.value)}
-          />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Role</label>
-          <Input 
-            placeholder="e.g. CTO" 
-            value={role} 
-            onChange={(e) => setRole(e.target.value)}
-          />
-        </div>
-      </div>
-      {/* Honeypot field - hidden from users */}
-      <input 
-        type="text" 
-        className="hidden" 
-        value={honeypot} 
-        onChange={(e) => setHoneypot(e.target.value)} 
-      />
-    </div>
-  );
-
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
       {/* Hero Savings Card */}
@@ -171,7 +131,37 @@ export default function AuditResults({ report }: { report: AuditReport }) {
             </p>
           </div>
           <div className="space-y-4">
-            <LeadFormFields />
+            <div className="space-y-3 max-w-md mx-auto text-left">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
+                <Input 
+                  placeholder="your@email.com" 
+                  type="email"
+                  required
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Company</label>
+                  <Input 
+                    placeholder="e.g. Acme Inc" 
+                    value={company} 
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Role</label>
+                  <Input 
+                    placeholder="e.g. CTO" 
+                    value={role} 
+                    onChange={(e) => setRole(e.target.value)}
+                  />
+                </div>
+              </div>
+              <input type="text" className="hidden" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+            </div>
             <Button 
               size="lg" 
               className="bg-orange-600 hover:bg-orange-700 text-white px-10 w-full max-w-md mx-auto"
@@ -189,7 +179,37 @@ export default function AuditResults({ report }: { report: AuditReport }) {
             Your setup is highly optimized. We&apos;ll notify you when new credits or plans become available.
           </p>
           <div className="space-y-4">
-            <LeadFormFields />
+            <div className="space-y-3 max-w-md mx-auto text-left">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
+                <Input 
+                  placeholder="your@email.com" 
+                  type="email"
+                  required
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Company</label>
+                  <Input 
+                    placeholder="e.g. Acme Inc" 
+                    value={company} 
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Role</label>
+                  <Input 
+                    placeholder="e.g. CTO" 
+                    value={role} 
+                    onChange={(e) => setRole(e.target.value)}
+                  />
+                </div>
+              </div>
+              <input type="text" className="hidden" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+            </div>
             <Button className="w-full max-w-md mx-auto" onClick={handleLeadCapture} disabled={loading}>
               {loading ? 'Submitting...' : 'Notify Me'}
             </Button>
@@ -202,7 +222,37 @@ export default function AuditResults({ report }: { report: AuditReport }) {
             <p className="text-gray-600">Enter your details to receive the full report and optimization guide.</p>
           </div>
           <div className="space-y-4">
-            <LeadFormFields />
+            <div className="space-y-3 max-w-md mx-auto text-left">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
+                <Input 
+                  placeholder="your@email.com" 
+                  type="email"
+                  required
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Company</label>
+                  <Input 
+                    placeholder="e.g. Acme Inc" 
+                    value={company} 
+                    onChange={(e) => setCompany(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Role</label>
+                  <Input 
+                    placeholder="e.g. CTO" 
+                    value={role} 
+                    onChange={(e) => setRole(e.target.value)}
+                  />
+                </div>
+              </div>
+              <input type="text" className="hidden" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+            </div>
             <Button className="w-full max-w-md mx-auto" onClick={handleLeadCapture} disabled={loading}>
               {loading ? 'Sending...' : 'Get Report'} <Mail className="ml-2 h-4 w-4" />
             </Button>
