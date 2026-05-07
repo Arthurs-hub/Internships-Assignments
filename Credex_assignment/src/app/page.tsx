@@ -74,7 +74,6 @@ export default function Home() {
         ) : (
           <AuditResults 
             report={report} 
-            onShare={() => alert('Share functionality coming soon!')} 
           />
         )}
 
