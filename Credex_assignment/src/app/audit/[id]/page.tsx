@@ -4,14 +4,10 @@ import AuditResults from '@/components/AuditResults';
 import { AuditReport } from '@/types';
 import { notFound } from 'next/navigation';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL || '',
-  process.env.SUPABASE_ANON_KEY || ''
-);
-
 async function getAudit(id: string): Promise<AuditReport | null> {
-  if (!process.env.SUPABASE_URL) return null; // Mock fallback or handle error
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return null; // Mock fallback or handle error
   
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
   const { data, error } = await supabase
     .from('audits')
     .select('*')
