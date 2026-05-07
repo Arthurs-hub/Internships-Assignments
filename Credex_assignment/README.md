@@ -4,7 +4,22 @@
 AI Spend Audit is a free tool designed to help startups and engineering managers identify overspend on AI tools like Cursor, Claude, and ChatGPT. By analyzing current plans and team sizes, it provides a defensible audit with actionable recommendations and surfaces significant savings opportunities through Credex credits.
 
 ## Screenshots
-[To be added after implementation]
+
+### 1. Spend Form (Input Stage)
+![Spend Form](./screenshots/1.png)
+*Simple, high-trust input interface for current AI tool usage.*
+
+### 2. Audit Results & Recommendations
+![Audit Results](./screenshots/2.png)
+*Detailed breakdown of monthly and annual savings with actionable plan optimizations.*
+
+### 3. Lead Capture & Viral Loop
+![Lead Capture](./screenshots/3.png)
+*Email capture for full reports and integrated Credex credit activation.*
+
+### 4. Mobile Responsiveness
+![Mobile View](./screenshots/4.jpg)
+*Optimized experience for founders and managers on the go.*
 
 ## Quick Start
 1. **Install dependencies**:
