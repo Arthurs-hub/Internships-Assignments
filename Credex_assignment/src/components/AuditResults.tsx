@@ -7,16 +7,20 @@ import { Input } from '@/components/ui/Input';
 import { TrendingDown, CheckCircle2, AlertCircle, ArrowRight, Share2, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-export default function AuditResults({ report, onShare }: { report: AuditReport, onShare: () => void }) {
+export default function AuditResults({ report }: { report: AuditReport }) {
   const [email, setEmail] = React.useState('');
+  const [company, setCompany] = React.useState('');
+  const [role, setRole] = React.useState('');
+  const [honeypot, setHoneypot] = React.useState('');
   const [submitted, setSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
 
   const isOptimal = report.totalMonthlySavings < 100;
   const highSavings = report.totalMonthlySavings > 500;
 
   const handleLeadCapture = async () => {
-    if (!email) return;
+    if (!email || honeypot) return; // Silent fail if bot filled honeypot
     setLoading(true);
     try {
       await fetch('/api/lead', {
@@ -24,6 +28,9 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,
+          company,
+          role,
+          teamSize: report.input.teamSize,
           reportId: report.id,
           totalSavings: report.totalMonthlySavings,
         }),
@@ -35,6 +42,57 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
       setLoading(false);
     }
   };
+
+  const handleShare = async () => {
+    const shareUrl = `${window.location.origin}/audit/${report.id}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy', err);
+    }
+  };
+
+  const LeadFormFields = () => (
+    <div className="space-y-3 max-w-md mx-auto text-left">
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Email Address</label>
+        <Input 
+          placeholder="your@email.com" 
+          type="email"
+          required
+          value={email} 
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Company</label>
+          <Input 
+            placeholder="e.g. Acme Inc" 
+            value={company} 
+            onChange={(e) => setCompany(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-semibold text-gray-500 uppercase mb-1 ml-1">Role</label>
+          <Input 
+            placeholder="e.g. CTO" 
+            value={role} 
+            onChange={(e) => setRole(e.target.value)}
+          />
+        </div>
+      </div>
+      {/* Honeypot field - hidden from users */}
+      <input 
+        type="text" 
+        className="hidden" 
+        value={honeypot} 
+        onChange={(e) => setHoneypot(e.target.value)} 
+      />
+    </div>
+  );
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
@@ -83,7 +141,7 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
         </div>
       </div>
 
-      {/* Personalized AI Summary Placeholder */}
+      {/* Personalized AI Summary */}
       <div className="bg-blue-50 border border-blue-100 p-6 rounded-xl">
         <div className="flex items-center gap-2 mb-3">
           <AlertCircle className="h-5 w-5 text-blue-600" />
@@ -102,23 +160,21 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
           <p className="text-green-800">Check your inbox for the full breakdown and Credex guide.</p>
         </div>
       ) : highSavings ? (
-        <div className="bg-orange-50 border border-orange-200 p-8 rounded-2xl text-center space-y-4">
-          <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="bg-orange-50 border border-orange-200 p-8 rounded-2xl text-center space-y-6">
+          <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="h-8 w-8 text-orange-600" />
           </div>
-          <h3 className="text-2xl font-bold text-orange-900">You&apos;re leaving money on the table.</h3>
-          <p className="text-orange-800 max-w-md mx-auto">
-            Your savings of over $500/mo qualify you for Credex Insider Credits. Capture more savings through our exclusive partner pool.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <Input 
-              placeholder="your@email.com" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold text-orange-900">You&apos;re leaving money on the table.</h3>
+            <p className="text-orange-800 max-w-md mx-auto">
+              Your savings qualify you for Credex Insider Credits. Capture more savings through our exclusive partner pool.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <LeadFormFields />
             <Button 
               size="lg" 
-              className="bg-orange-600 hover:bg-orange-700 text-white whitespace-nowrap"
+              className="bg-orange-600 hover:bg-orange-700 text-white px-10 w-full max-w-md mx-auto"
               onClick={handleLeadCapture}
               disabled={loading}
             >
@@ -127,33 +183,27 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
           </div>
         </div>
       ) : isOptimal ? (
-        <div className="bg-green-50 border border-green-200 p-8 rounded-2xl text-center space-y-4">
+        <div className="bg-green-50 border border-green-200 p-8 rounded-2xl text-center space-y-6">
           <h3 className="text-2xl font-bold text-green-900">You&apos;re spending well!</h3>
           <p className="text-green-800">
-            Your current setup is already highly optimized. We&apos;ll notify you when new credits or plans become available.
+            Your setup is highly optimized. We&apos;ll notify you when new credits or plans become available.
           </p>
-          <div className="flex gap-2 max-w-md mx-auto">
-            <Input 
-              placeholder="your@email.com" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Button onClick={handleLeadCapture} disabled={loading}>
+          <div className="space-y-4">
+            <LeadFormFields />
+            <Button className="w-full max-w-md mx-auto" onClick={handleLeadCapture} disabled={loading}>
               {loading ? 'Submitting...' : 'Notify Me'}
             </Button>
           </div>
         </div>
       ) : (
-        <div className="bg-white border border-gray-200 p-8 rounded-2xl text-center space-y-4 shadow-sm">
-          <h3 className="text-2xl font-bold text-gray-900">Capture this Audit</h3>
-          <p className="text-gray-600">Enter your email to receive the full report and optimization guide.</p>
-          <div className="flex gap-2 max-w-md mx-auto">
-            <Input 
-              placeholder="your@email.com" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Button onClick={handleLeadCapture} disabled={loading}>
+        <div className="bg-white border border-gray-200 p-8 rounded-2xl text-center space-y-6 shadow-sm">
+          <div className="space-y-2">
+            <h3 className="text-2xl font-bold text-gray-900">Capture this Audit</h3>
+            <p className="text-gray-600">Enter your details to receive the full report and optimization guide.</p>
+          </div>
+          <div className="space-y-4">
+            <LeadFormFields />
+            <Button className="w-full max-w-md mx-auto" onClick={handleLeadCapture} disabled={loading}>
               {loading ? 'Sending...' : 'Get Report'} <Mail className="ml-2 h-4 w-4" />
             </Button>
           </div>
@@ -162,8 +212,8 @@ export default function AuditResults({ report, onShare }: { report: AuditReport,
 
       {/* Share Actions */}
       <div className="flex justify-center gap-4">
-        <Button variant="outline" onClick={onShare}>
-          <Share2 className="mr-2 h-4 w-4" /> Share Results
+        <Button variant="outline" onClick={handleShare}>
+          <Share2 className="mr-2 h-4 w-4" /> {copied ? 'Link Copied!' : 'Share Results'}
         </Button>
       </div>
     </div>

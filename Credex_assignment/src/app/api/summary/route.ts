@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ summary: generateFallbackSummary(auditData) });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
     const prompt = `Generate a 100-word personalized summary for an AI spend audit. 
     Total Monthly Savings: $${auditData.totalMonthlySavings}.
@@ -29,13 +29,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ summary });
   } catch (error) {
     console.error('Gemini Summary Error:', error);
-    // Attempt to parse body again for fallback if possible
-    try {
-        const body = await req.json();
-        return NextResponse.json({ summary: generateFallbackSummary(body.auditData) });
-    } catch {
-        return NextResponse.json({ summary: "We've analyzed your AI spend and identified several high-impact savings opportunities through plan optimization and Credex credits." });
-    }
+    return NextResponse.json({ 
+      summary: "We've analyzed your AI spend and identified several high-impact savings opportunities through plan optimization and Credex credits." 
+    });
   }
 }
 
