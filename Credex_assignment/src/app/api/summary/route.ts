@@ -37,5 +37,6 @@ export async function POST(req: NextRequest) {
 }
 
 function generateFallbackSummary(auditData: AuditReport) {
-  return `Based on your AI stack analysis, you have a significant optimization opportunity with total potential annual savings of $${auditData.totalAnnualSavings.toLocaleString()}. By switching plans for ${auditData.recommendations.length} of your tools and leveraging Credex infrastructure credits, you can drastically reduce your burn without sacrificing performance. We recommend starting with your highest-spend tools to capture immediate ROI.`;
+  const topTool = auditData.recommendations.sort((a, b) => b.savings - a.savings)[0];
+  return `Credex Executive Summary: Our analysis reveals a massive efficiency gap in your AI infrastructure. By optimizing your ${auditData.recommendations.length} primary tools, specifically targeting ${topTool?.tool || 'high-spend areas'}, you can capture $${auditData.totalAnnualSavings.toLocaleString()} in annual run-rate savings. We recommend immediate migration to Credex-partnered tiers to unlock additional infrastructure credits and stabilize your burn rate.`;
 }
