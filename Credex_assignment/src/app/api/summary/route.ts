@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('Gemini Summary Error:', error);
     return NextResponse.json({ 
-      summary: "We've analyzed your AI spend and identified several high-impact savings opportunities through plan optimization and Credex credits." 
+      summary: "Credex AI Audit Analysis: We've identified high-impact savings opportunities through plan optimization and infrastructure credits." 
     });
   }
 }
