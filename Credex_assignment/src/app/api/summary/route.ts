@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
     }
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    console.log('Using model: gemini-1.5-flash');
 
     const prompt = `Generate a 100-word personalized summary for an AI spend audit. 
     Total Monthly Savings: $${auditData.totalMonthlySavings}.
