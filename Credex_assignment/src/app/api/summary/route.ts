@@ -37,6 +37,6 @@ export async function POST(req: NextRequest) {
 }
 
 function generateFallbackSummary(auditData: AuditReport) {
-  const topTool = auditData.recommendations.sort((a, b) => b.savings - a.savings)[0];
+  const topTool = auditData.recommendations.sort((a, b) => b.monthlySavings - a.monthlySavings)[0];
   return `Credex Executive Summary: Our analysis reveals a massive efficiency gap in your AI infrastructure. By optimizing your ${auditData.recommendations.length} primary tools, specifically targeting ${topTool?.tool || 'high-spend areas'}, you can capture $${auditData.totalAnnualSavings.toLocaleString()} in annual run-rate savings. We recommend immediate migration to Credex-partnered tiers to unlock additional infrastructure credits and stabilize your burn rate.`;
 }
