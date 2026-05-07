@@ -13,8 +13,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ summary: generateFallbackSummary(auditData) });
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    console.log('Using model: gemini-1.5-flash');
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
+    console.log('!!! PROD MODEL: gemini-1.5-flash-8b !!!', new Date().toISOString());
 
     const prompt = `Generate a 100-word personalized summary for an AI spend audit. 
     Total Monthly Savings: $${auditData.totalMonthlySavings}.
