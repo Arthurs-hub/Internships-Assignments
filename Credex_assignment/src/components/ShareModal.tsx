@@ -12,6 +12,22 @@ interface ShareModalProps {
   title: string;
 }
 
+interface BaseShareOption {
+  name: string;
+  icon: React.ReactNode;
+  color: string;
+}
+
+interface LinkShareOption extends BaseShareOption {
+  href: string;
+}
+
+interface ActionShareOption extends BaseShareOption {
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+type ShareOption = LinkShareOption | ActionShareOption;
+
 export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps) {
   const [copied, setCopied] = React.useState(false);
 
@@ -33,7 +49,7 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
     }
   };
 
-  const shareOptions = [
+  const shareOptions: ShareOption[] = [
     {
       name: 'LinkedIn',
       icon: (
@@ -106,21 +122,29 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
               </div>
 
               <div className="grid grid-cols-2 gap-4 mb-8">
-                {shareOptions.map((option) => (
-                  <a
-                    key={option.name}
-                    href={('href' in option) ? option.href : '#'}
-                    onClick={('onClick' in option) ? (e) => { e.preventDefault(); option.onClick(e); } : undefined}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
-                  >
-                    <div className={`${option.color} text-white p-2 rounded-lg`}>
-                      {option.icon}
-                    </div>
-                    <span className="font-medium text-gray-700">{option.name}</span>
-                  </a>
-                ))}
+                {shareOptions.map((option) => {
+                  const isLink = 'href' in option;
+                  return (
+                    <a
+                      key={option.name}
+                      href={isLink ? option.href : '#'}
+                      onClick={(e) => {
+                        if (!isLink) {
+                          e.preventDefault();
+                          option.onClick(e);
+                        }
+                      }}
+                      target={isLink ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
+                    >
+                      <div className={`${option.color} text-white p-2 rounded-lg`}>
+                        {option.icon}
+                      </div>
+                      <span className="font-medium text-gray-700">{option.name}</span>
+                    </a>
+                  );
+                })}
               </div>
 
               <div className="space-y-3">
