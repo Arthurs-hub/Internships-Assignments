@@ -4,8 +4,9 @@ import React from 'react';
 import { AuditReport } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { TrendingDown, CheckCircle2, AlertCircle, Share2 } from 'lucide-react';
+import { TrendingDown, CheckCircle2, AlertCircle, ArrowRight, Share2, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
+import ShareModal from './ShareModal';
 
 export default function AuditResults({ report }: { report: AuditReport }) {
   const [email, setEmail] = React.useState('');
@@ -14,10 +15,13 @@ export default function AuditResults({ report }: { report: AuditReport }) {
   const [honeypot, setHoneypot] = React.useState('');
   const [submitted, setSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const [copied, setCopied] = React.useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
+
+  const isOptimal = report.totalMonthlySavings < 100;
+  const highSavings = report.totalMonthlySavings > 500;
 
   const handleLeadCapture = async () => {
-    if (!email || honeypot) return;
+    if (!email || honeypot) return; // Silent fail if bot filled honeypot
     setLoading(true);
     try {
       await fetch('/api/lead', {
@@ -40,15 +44,8 @@ export default function AuditResults({ report }: { report: AuditReport }) {
     }
   };
 
-  const handleShare = async () => {
-    const shareUrl = `${window.location.origin}/audit/${report.id}`;
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy', err);
-    }
+  const handleShare = () => {
+    setIsShareModalOpen(true);
   };
 
   return (
@@ -164,7 +161,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
           className="w-full bg-white shadow-sm" 
           onClick={handleShare}
         >
-          <Share2 className="mr-2 h-4 w-4" /> {copied ? 'Link Copied!' : 'Share Results'}
+          <Share2 className="mr-2 h-4 w-4" /> Share Results
         </Button>
 
         <div className="p-4 bg-orange-50 border border-orange-100 rounded-xl">
@@ -173,6 +170,13 @@ export default function AuditResults({ report }: { report: AuditReport }) {
           </p>
         </div>
       </div>
+
+      <ShareModal 
+        isOpen={isShareModalOpen} 
+        onClose={() => setIsShareModalOpen(false)}
+        shareUrl={typeof window !== 'undefined' ? `${window.location.origin}/audit/${report.id}` : ''}
+        title="My AI Spend Audit Results"
+      />
     </div>
   );
 }
