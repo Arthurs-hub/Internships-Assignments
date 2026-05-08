@@ -23,7 +23,7 @@ interface ShareOption {
   onClick?: () => void;
 }
 
-export default function ShareModal({ isOpen, onClose, shareUrl, title, reportId }: ShareModalProps) {
+export default function ShareModal({ isOpen, onClose, shareUrl, title, reportId, totalSavings }: ShareModalProps) {
   const [copied, setCopied] = React.useState(false);
   const [showEmailForm, setShowEmailForm] = React.useState(false);
   const [recipientEmail, setRecipientEmail] = React.useState('');
