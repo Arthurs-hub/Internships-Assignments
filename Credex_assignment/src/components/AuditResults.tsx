@@ -92,7 +92,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
                   </div>
                   <div className="w-24 text-right">
                     <p className="text-xs text-gray-500 uppercase font-medium">Savings</p>
-                    <p className="font-bold text-green-600">${rec.monthlySavings}/mo</p>
+                    <p className="font-bold text-green-600">${rec.monthlySavings.toLocaleString()}/mo</p>
                   </div>
                 </div>
               </div>
