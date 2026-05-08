@@ -177,6 +177,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
         shareUrl={typeof window !== 'undefined' ? `${window.location.origin}/audit/${report.id}` : ''}
         title="My AI Spend Audit Results"
         reportId={report.id}
+        totalSavings={report.totalMonthlySavings}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 
 export async function POST(req: NextRequest) {
   try {
-    const { email, company, role, teamSize, reportId, totalSavings } = await req.json();
+    const { email, company, role, teamSize, reportId, totalSavings, source } = await req.json();
 
     // 1. Store in Supabase (if keys exist)
     if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
@@ -13,11 +13,12 @@ export async function POST(req: NextRequest) {
         .from('leads')
         .insert([{ 
           email, 
-          company, 
-          role, 
-          team_size: teamSize, 
+          company: company || 'N/A', 
+          role: role || 'N/A', 
+          team_size: teamSize || 0, 
           report_id: reportId, 
-          total_savings: totalSavings 
+          total_savings: totalSavings || 0,
+          metadata: { source }
         }]);
       
       if (error) console.error('Supabase Error:', error);
@@ -27,11 +28,21 @@ export async function POST(req: NextRequest) {
     if (process.env.RESEND_API_KEY) {
       console.log('Attempting to send email via Resend...');
       const resend = new Resend(process.env.RESEND_API_KEY);
+      
+      const shareUrl = `${req.nextUrl.origin}/audit/${reportId}`;
+      const savingsText = totalSavings ? `You can save $${totalSavings.toLocaleString()} per month.` : 'Check out the audit report.';
+
       const { data, error } = await resend.emails.send({
         from: 'AI Spend Audit <onboarding@resend.dev>',
-        to: email,
+        to: email, // Note: In Resend sandbox, this ONLY works for the owner's email
         subject: 'Your AI Spend Audit Results',
-        html: `<h1>Your Audit is ready</h1><p>You can save $${totalSavings.toLocaleString()} per month.</p>`,
+        html: `
+          <h1>Your Audit is ready</h1>
+          <p>${savingsText}</p>
+          <p><a href="${shareUrl}">Click here to view the full report</a></p>
+          <hr />
+          <p><small>Sent via Credex AI Spend Audit</small></p>
+        `,
       });
 
       if (error) {

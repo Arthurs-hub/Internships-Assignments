@@ -12,6 +12,7 @@ interface ShareModalProps {
   shareUrl: string;
   title: string;
   reportId?: string;
+  totalSavings?: number;
 }
 
 interface ShareOption {
@@ -51,6 +52,7 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title, reportId 
         body: JSON.stringify({
           email: recipientEmail,
           reportId: reportId,
+          totalSavings: totalSavings,
           source: 'share_modal'
         }),
       });
