@@ -25,6 +25,14 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
     }
   };
 
+  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (typeof window !== 'undefined') {
+      const subject = encodeURIComponent(title);
+      const body = encodeURIComponent(`Check out my AI Spend Audit results: ${shareUrl}`);
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    }
+  };
+
   const shareOptions = [
     {
       name: 'LinkedIn',
@@ -62,7 +70,7 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
       name: 'Email',
       icon: <Mail className="h-5 w-5" />,
       color: 'bg-gray-600',
-      href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out my AI Spend Audit results: ${shareUrl}`)}`,
+      onClick: handleEmailClick,
     },
   ];
 
@@ -101,7 +109,8 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
                 {shareOptions.map((option) => (
                   <a
                     key={option.name}
-                    href={option.href}
+                    href={('href' in option) ? option.href : '#'}
+                    onClick={('onClick' in option) ? (e) => { e.preventDefault(); option.onClick(e); } : undefined}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
