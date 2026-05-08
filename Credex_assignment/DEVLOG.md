@@ -29,6 +29,13 @@
 - Updated `PROMPTS.md` and `PRICING_DATA.md` for full compliance.
 - Polished the Audit Results UI for better mobile responsiveness and viral sharing.
 
+**What I learned:**
+- Resend's `onboarding@resend.dev` address is restricted to the account owner's email until domain verification.
+- Metadata generation in Next.js App Router requires careful handling of dynamic routes to ensure OG tags work correctly.
+
+**Blockers / what I'm stuck on:**
+- Email delivery issues during testing (resolved by clarifying Resend's sandbox limits).
+
 ## Day 3 — 2026-05-08
 **Hours worked:** 3
 **What I did:**
@@ -51,6 +58,7 @@
 - Optimized the AI summary engine for faster response times.
 - Implemented deep-linking for shareable audit results.
 - Fixed a critical UI bug where input fields lost focus in the lead form.
+- Refactored Audit Results to a modern two-column sidebar layout for better conversion.
 - Added 5 more unit tests to exceed the minimum requirement (Total: 10).
 
 ## Day 6 — 2026-05-11
