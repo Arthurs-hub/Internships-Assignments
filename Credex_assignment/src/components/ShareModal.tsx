@@ -12,21 +12,12 @@ interface ShareModalProps {
   title: string;
 }
 
-interface BaseShareOption {
+interface ShareOption {
   name: string;
   icon: React.ReactNode;
   color: string;
-}
-
-interface LinkShareOption extends BaseShareOption {
   href: string;
 }
-
-interface ActionShareOption extends BaseShareOption {
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}
-
-type ShareOption = LinkShareOption | ActionShareOption;
 
 export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps) {
   const [copied, setCopied] = React.useState(false);
@@ -38,14 +29,6 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy', err);
-    }
-  };
-
-  const handleEmailClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (typeof window !== 'undefined') {
-      const subject = encodeURIComponent(title);
-      const body = encodeURIComponent(`Check out my AI Spend Audit results: ${shareUrl}`);
-      window.location.href = `mailto:?subject=${subject}&body=${body}`;
     }
   };
 
@@ -86,7 +69,7 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
       name: 'Email',
       icon: <Mail className="h-5 w-5" />,
       color: 'bg-gray-600',
-      onClick: handleEmailClick,
+      href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out my AI Spend Audit results: ${shareUrl}`)}`,
     },
   ];
 
@@ -123,18 +106,12 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {shareOptions.map((option) => {
-                  const isLink = 'href' in option;
+                  const isMailto = option.href.startsWith('mailto:');
                   return (
                     <a
                       key={option.name}
-                      href={isLink ? option.href : '#'}
-                      onClick={(e) => {
-                        if (!isLink) {
-                          e.preventDefault();
-                          option.onClick(e);
-                        }
-                      }}
-                      target={isLink ? "_blank" : undefined}
+                      href={option.href}
+                      target={isMailto ? undefined : "_blank"}
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
                     >
