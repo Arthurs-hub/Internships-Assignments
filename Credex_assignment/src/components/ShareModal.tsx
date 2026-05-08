@@ -2,25 +2,32 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Link as LinkIcon, Check, Share2 } from 'lucide-react';
+import { X, Mail, Link as LinkIcon, Check, Send, ArrowLeft, Loader2 } from 'lucide-react';
 import { Button } from './ui/Button';
+import { Input } from './ui/Input';
 
 interface ShareModalProps {
   isOpen: boolean;
   onClose: () => void;
   shareUrl: string;
   title: string;
+  reportId?: string;
 }
 
 interface ShareOption {
   name: string;
   icon: React.ReactNode;
   color: string;
-  href: string;
+  href?: string;
+  onClick?: () => void;
 }
 
-export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareModalProps) {
+export default function ShareModal({ isOpen, onClose, shareUrl, title, reportId }: ShareModalProps) {
   const [copied, setCopied] = React.useState(false);
+  const [showEmailForm, setShowEmailForm] = React.useState(false);
+  const [recipientEmail, setRecipientEmail] = React.useState('');
+  const [isSending, setIsSending] = React.useState(false);
+  const [isSent, setIsSent] = React.useState(false);
 
   const handleCopy = async () => {
     try {
@@ -29,6 +36,34 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy', err);
+    }
+  };
+
+  const handleEmailSend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!recipientEmail) return;
+
+    setIsSending(true);
+    try {
+      await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: recipientEmail,
+          reportId: reportId,
+          source: 'share_modal'
+        }),
+      });
+      setIsSent(true);
+      setTimeout(() => {
+        setIsSent(false);
+        setShowEmailForm(false);
+        setRecipientEmail('');
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to send email share', error);
+    } finally {
+      setIsSending(false);
     }
   };
 
@@ -69,7 +104,7 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
       name: 'Email',
       icon: <Mail className="h-5 w-5" />,
       color: 'bg-gray-600',
-      href: `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out my AI Spend Audit results: ${shareUrl}`)}`,
+      onClick: () => setShowEmailForm(true),
     },
   ];
 
@@ -77,7 +112,6 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -86,7 +120,6 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           />
 
-          {/* Modal Content */}
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -95,7 +128,19 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-gray-900">Share Results</h3>
+                <div className="flex items-center gap-2">
+                  {showEmailForm && (
+                    <button 
+                      onClick={() => setShowEmailForm(false)}
+                      className="p-1 hover:bg-gray-100 rounded-full transition-colors mr-1"
+                    >
+                      <ArrowLeft className="h-4 w-4 text-gray-500" />
+                    </button>
+                  )}
+                  <h3 className="text-xl font-bold text-gray-900">
+                    {showEmailForm ? 'Send to Email' : 'Share Results'}
+                  </h3>
+                </div>
                 <button
                   onClick={onClose}
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
@@ -104,25 +149,82 @@ export default function ShareModal({ isOpen, onClose, shareUrl, title }: ShareMo
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {shareOptions.map((option) => {
-                  const isMailto = option.href.startsWith('mailto:');
-                  return (
-                    <a
-                      key={option.name}
-                      href={option.href}
-                      target={isMailto ? undefined : "_blank"}
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
-                    >
-                      <div className={`${option.color} text-white p-2 rounded-lg`}>
-                        {option.icon}
+              <AnimatePresence mode="wait">
+                {!showEmailForm ? (
+                  <motion.div
+                    key="options"
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: 20, opacity: 0 }}
+                    className="grid grid-cols-2 gap-4 mb-8"
+                  >
+                    {shareOptions.map((option) => {
+                      const isExternal = !!option.href;
+                      return (
+                        <a
+                          key={option.name}
+                          href={option.href || '#'}
+                          onClick={(e) => {
+                            if (!isExternal && option.onClick) {
+                              e.preventDefault();
+                              option.onClick();
+                            }
+                          }}
+                          target={isExternal ? "_blank" : undefined}
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 p-3 rounded-xl border border-gray-100 hover:bg-gray-50 transition-colors group"
+                        >
+                          <div className={`${option.color} text-white p-2 rounded-lg`}>
+                            {option.icon}
+                          </div>
+                          <span className="font-medium text-gray-700">{option.name}</span>
+                        </a>
+                      );
+                    })}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="email-form"
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    exit={{ x: -20, opacity: 0 }}
+                    className="mb-8"
+                  >
+                    {isSent ? (
+                      <div className="text-center py-8 bg-green-50 rounded-xl border border-green-100">
+                        <Check className="h-12 w-12 text-green-600 mx-auto mb-2" />
+                        <p className="font-bold text-green-900 text-lg">Report Sent!</p>
+                        <p className="text-green-800 text-sm">Check the inbox for your audit results.</p>
                       </div>
-                      <span className="font-medium text-gray-700">{option.name}</span>
-                    </a>
-                  );
-                })}
-              </div>
+                    ) : (
+                      <form onSubmit={handleEmailSend} className="space-y-4">
+                        <p className="text-sm text-gray-600">Enter the email address where you want to receive the audit results.</p>
+                        <div className="space-y-3">
+                          <Input
+                            placeholder="Recipient's Email"
+                            type="email"
+                            required
+                            value={recipientEmail}
+                            onChange={(e) => setRecipientEmail(e.target.value)}
+                            autoFocus
+                          />
+                          <Button 
+                            type="submit" 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                            disabled={isSending}
+                          >
+                            {isSending ? (
+                              <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</>
+                            ) : (
+                              <><Send className="mr-2 h-4 w-4" /> Send Report</>
+                            )}
+                          </Button>
+                        </div>
+                      </form>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
 
               <div className="space-y-3">
                 <p className="text-sm font-medium text-gray-500">Or copy link</p>
