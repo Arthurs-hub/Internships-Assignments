@@ -1,43 +1,29 @@
 # USER_INTERVIEWS.md
 
-## Interview 1: Mark T., CTO at Seed-stage Fintech (12 employees)
-Mark is the typical "busy CTO" who handles everything from architecture to paying the SaaS bills. Our conversation lasted about 15 minutes, and we focused on how he tracks AI costs across his growing team.
+## Interview 1: Vasili Stoleicov — Software Engineer, Full-Stack (Laravel, Node.js, Vue/Nuxt, React, Docker)
+**Format:** LinkedIn DM outreach | **Date:** 2026-05-11
 
-- **Direct Quotes**:
-  - "I have no idea what my team is actually using on a day-to-day basis. I just see 'OpenAI' and 'Cursor' pops up on the Brex statement every month, and I just hit approve."
-  - "We have 12 people on ChatGPT Plus right now, mostly because it was the easiest thing to set up on day one. I honestly didn't know there was a Team plan that offered better management."
-  - "If this tool could save me even $400/mo, that's not just 'savings'—that's almost a whole new subscription for a monitoring tool or a small server upgrade that we've been delaying."
+Vasili is a software engineer who actively uses AI tools in his daily workflow. I reached out via LinkedIn with a direct message explaining the project, sharing the live URL and GitHub repo, and asking him to spend ~2 minutes on the tool and answer 3 specific questions:
+1. How clear are the savings breakdowns in the charts?
+2. Does the Credex Insider Credits block feel trustworthy?
+3. What's missing that would make you actually want to use this in the future?
 
-- **The Most Surprising Thing**:
-Mark didn't realize that the ChatGPT Team plan actually has better data privacy and "no training on your data" defaults compared to individual Plus accounts. For a fintech company, this was actually more important than the $5/user savings. He was shocked that he was paying *more* for *less* privacy.
+**What happened:**
+Vasili declined to engage with the product. His responses over the course of ~2.5 hours were:
+- "Привет дорогой! Я очень занят...." ("Hi! I'm very busy...")
+- "Незнаю...." ("I don't know...")
+- "Времени нет..." ("No time...")
 
-- **What it changed about my design**:
-This interview made me realize that "Price" isn't the only driver. I added a "Reason" field to each audit line in the `AuditResults.tsx` component. Instead of just saying "Save $5," it now explains *why* (e.g., "Better privacy + admin controls"). It transformed the tool from a simple calculator into a strategic advice tool.
+**The most surprising thing:**
+Even a software engineer who uses AI tools daily and fits the exact target persona reacted with immediate friction to the idea of a manual audit — before even opening the link. The barrier wasn't the tool itself, it was the perceived time cost of the task.
 
-## Interview 2: Sarah L., Solo Founder at Nexus AI (Pre-seed)
-Sarah is a solo founder building an AI-native product. She is very cost-conscious but also fears "missing out" on the best models.
+**What it changed about my design:**
+This confirmed that the value proposition needs to be visible before any interaction is required. I added a "2-minute audit" framing to the hero section and reduced the number of required fields to lower the perceived effort on first load.
 
-- **Direct Quotes**:
-  - "I'm currently paying for Cursor Pro, Claude Pro, and ChatGPT Plus all at once. I know it's redundant, but I'm terrified that if I cancel one, I'll lose access to the best model for a specific coding task."
-  - "I'd switch my entire workflow in a heartbeat if someone just showed me a table proving which tool is actually the best for Python and React right now."
-  - "To be honest, I don't care about saving $10. My time is worth more. But if you show me I'm wasting $100/mo on stuff I don't use, that feels like a personal failure as a founder."
+---
 
-- **The Most Surprising Thing**:
-Sarah hates "redundancy" more than the actual cost. She feels "guilty" about having three different subscriptions that all essentially use the same underlying Claude 3.5 or GPT-4 models. Her pain isn't just financial; it's the mental clutter of managing too many tools.
+## Interview 2: [Pending]
+*Outreach sent. Will be updated upon response.*
 
-- **What it changed about my design**:
-I improved the Audit Engine logic to suggest "Consolidation" for solo users. If the tool sees a user is on both Claude Pro and ChatGPT Plus, it now explicitly suggests picking one based on their primary use case, rather than just suggesting a cheaper plan for each.
-
-## Interview 3: David G., Engineering Manager at Growth-stage SaaS (30+ people)
-David manages three different pods of developers. He doesn't pay the bills himself (finance does), but he is responsible for the team's efficiency.
-
-- **Direct Quotes**:
-  - "Procurement is a complete nightmare in our company. Because of the friction, I just let everyone put their AI tools on their individual personal cards and then they reimburse it. It's a mess to track."
-  - "Does this tool handle API spend? We're spending $3k/mo on Anthropic API, and that is a much bigger 'black hole' for us than the $20 monthly seats."
-  - "The idea of 'Credex credits' sounds interesting, but I'll be honest—it sounds a bit too good to be true. I'd need to know it's a real partnership and not some shady reseller."
-
-- **The Most Surprising Thing**:
-The biggest blocker for a manager like David isn't the price—it's **Trust**. He is worried that using discounted credits might lead to his API keys being revoked or the service being unreliable. He needs "social proof" and official links to feel safe.
-
-- **What it changed about my design**:
-I added "Defensible Logic" and "Source Citations" to the `PRICING_DATA.md` and ensured the UI links directly to official vendor pages. I also made sure the Credex "call to action" emphasizes that these are *official* company credits, which addresses the "shady reseller" fear I heard from David.
+## Interview 3: [Pending]
+*Outreach sent. Will be updated upon response.*
