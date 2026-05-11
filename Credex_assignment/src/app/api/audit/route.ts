@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
       const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
       const { error } = await supabase
         .from('audits')
-        .insert([{ id: audit.id, data: audit }]);
+        .insert([{ id: audit.id, data: JSON.parse(JSON.stringify(audit)) }]);
 
       if (error) throw error;
     }

@@ -15,7 +15,8 @@ async function getAudit(id: string): Promise<AuditReport | null> {
     .single();
     
   if (error || !data) return null;
-  return data.data as AuditReport;
+  const raw = data.data;
+  return (typeof raw === 'string' ? JSON.parse(raw) : raw) as AuditReport;
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
