@@ -11,9 +11,10 @@ async function getAudit(id: string): Promise<AuditReport | null> {
   console.log('[getAudit] SUPABASE_URL:', process.env.SUPABASE_URL ? 'set' : 'missing');
   console.log('[getAudit] SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? 'set' : 'missing');
 
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return null;
+  const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
+  if (!process.env.SUPABASE_URL || !supabaseKey) return null;
   
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+  const supabase = createClient(process.env.SUPABASE_URL, supabaseKey);
   const { data, error } = await supabase
     .from('audits')
     .select('data')
