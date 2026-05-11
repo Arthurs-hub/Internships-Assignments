@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { createClient } from '@supabase/supabase-js';
 import AuditResults from '@/components/AuditResults';
 import { AuditReport } from '@/types';
 import { notFound } from 'next/navigation';
@@ -7,24 +6,18 @@ import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 async function getAudit(id: string): Promise<AuditReport | null> {
-  console.log('[getAudit] id:', id);
-  console.log('[getAudit] SUPABASE_URL:', process.env.SUPABASE_URL ? 'set' : 'missing');
-  console.log('[getAudit] SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? 'set' : 'missing');
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
+  if (!url || !key) { console.log('[getAudit] missing env vars'); return null; }
 
-  const supabaseKey = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
-  if (!process.env.SUPABASE_URL || !supabaseKey) return null;
-  
-  const supabase = createClient(process.env.SUPABASE_URL, supabaseKey);
-  const { data, error } = await supabase
-    .from('audits')
-    .select('data')
-    .eq('id', id);
-
-  console.log('[getAudit] rows:', JSON.stringify(data));
-  console.log('[getAudit] error:', error);
-    
-  if (error || !data || data.length === 0) return null;
-  const raw = data[0].data;
+  const res = await fetch(
+    `${url}/rest/v1/audits?id=eq.${id}&select=data`,
+    { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: 'no-store' }
+  );
+  const rows = await res.json();
+  console.log('[getAudit] rows:', JSON.stringify(rows));
+  if (!Array.isArray(rows) || rows.length === 0) return null;
+  const raw = rows[0].data;
   return (typeof raw === 'string' ? JSON.parse(raw) : raw) as AuditReport;
 }
 
