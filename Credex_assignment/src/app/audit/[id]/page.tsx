@@ -18,14 +18,13 @@ async function getAudit(id: string): Promise<AuditReport | null> {
   const { data, error } = await supabase
     .from('audits')
     .select('data')
-    .eq('id', id)
-    .single();
+    .eq('id', id);
 
-  console.log('[getAudit] data:', data);
+  console.log('[getAudit] rows:', JSON.stringify(data));
   console.log('[getAudit] error:', error);
     
-  if (error || !data) return null;
-  const raw = data.data;
+  if (error || !data || data.length === 0) return null;
+  const raw = data[0].data;
   return (typeof raw === 'string' ? JSON.parse(raw) : raw) as AuditReport;
 }
 
