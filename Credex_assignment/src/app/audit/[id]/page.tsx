@@ -5,6 +5,10 @@ import { AuditReport } from '@/types';
 import { notFound } from 'next/navigation';
 
 async function getAudit(id: string): Promise<AuditReport | null> {
+  console.log('[getAudit] id:', id);
+  console.log('[getAudit] SUPABASE_URL:', process.env.SUPABASE_URL ? 'set' : 'missing');
+  console.log('[getAudit] SUPABASE_ANON_KEY:', process.env.SUPABASE_ANON_KEY ? 'set' : 'missing');
+
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return null;
   
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
@@ -13,6 +17,9 @@ async function getAudit(id: string): Promise<AuditReport | null> {
     .select('data')
     .eq('id', id)
     .single();
+
+  console.log('[getAudit] data:', data);
+  console.log('[getAudit] error:', error);
     
   if (error || !data) return null;
   const raw = data.data;
