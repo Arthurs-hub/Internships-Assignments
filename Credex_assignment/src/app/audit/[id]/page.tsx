@@ -6,8 +6,8 @@ import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
-const SUPABASE_URL = 'https://dfpzqambxazdpnryezwj.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRmcHpxYW1ieGF6ZHBucnllendqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODUxNTMxOCwiZXhwIjoyMDk0MDkxMzE4fQ.ulBI6BNJxDhpNztrV4NHth2KlWeyqBNiT-JDEm23dYg';
+const SUPABASE_URL = process.env.SUPABASE_URL!;
+const SUPABASE_KEY = (process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY)!;
 
 async function getAudit(id: string): Promise<AuditReport | null> {
   try {
