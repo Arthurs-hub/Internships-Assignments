@@ -62,14 +62,19 @@
 **Plan for tomorrow:** Resume work on Day 6 — finalize docs, conduct user outreach, polish UI.
 
 ## Day 6 — 2026-05-11
-**Hours worked:** 1.5
+**Hours worked:** 4
 **What I did:**
 - Finalized all 12+ documentation files.
 - Completed the "Reflection" document with a detailed debugging story.
 - Performed a full end-to-end security and performance audit of the app.
 - Conducted real-world outreach to professional users (Software Engineers) for live feedback.
-- Cleaned up `USER_INTERVIEWS.md` by removing 3 AI-generated mock interviews.
+- Cleaned up `USER_INTERVIEWS.md` by removing AI-generated mock interviews.
 - Documented first real interview with Vasili Stoleicov and added placeholders for remaining required interviews.
+- Debugged and fixed shareable URL (404 issue): root cause was Supabase PostgREST not returning rows via JS client due to new JWT key system — resolved by switching to direct REST fetch with service_role key.
+- Created `audits` and `leads` tables in Supabase with RLS policies.
+- Fixed Gemini model from deprecated `gemini-1.5-flash` to `gemini-2.0-flash`.
+- Fixed audit storage to save as proper JSON blob.
+- Added `force-dynamic` and `fetchCache: force-no-store` to audit page to prevent static caching.
 
 ## Day 7 — 2026-05-12
 **Hours worked:** 1
