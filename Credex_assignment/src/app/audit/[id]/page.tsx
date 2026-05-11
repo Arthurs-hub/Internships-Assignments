@@ -14,6 +14,7 @@ async function getAudit(id: string): Promise<AuditReport | null> {
     `${url}/rest/v1/audits?id=eq.${id}&select=data`,
     { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: 'no-store' }
   );
+  console.log('[getAudit] fetch url:', `${url}/rest/v1/audits?id=eq.${id}&select=data`);
   const rows = await res.json();
   console.log('[getAudit] rows:', JSON.stringify(rows));
   if (!Array.isArray(rows) || rows.length === 0) return null;
