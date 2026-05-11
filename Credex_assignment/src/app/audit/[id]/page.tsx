@@ -5,17 +5,17 @@ import { AuditReport } from '@/types';
 import { notFound } from 'next/navigation';
 
 async function getAudit(id: string): Promise<AuditReport | null> {
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return null; // Mock fallback or handle error
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) return null;
   
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
   const { data, error } = await supabase
     .from('audits')
-    .select('*')
+    .select('data')
     .eq('id', id)
     .single();
     
   if (error || !data) return null;
-  return data as AuditReport;
+  return data.data as AuditReport;
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
