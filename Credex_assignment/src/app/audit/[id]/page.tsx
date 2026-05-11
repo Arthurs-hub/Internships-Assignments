@@ -4,6 +4,8 @@ import AuditResults from '@/components/AuditResults';
 import { AuditReport } from '@/types';
 import { notFound } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 async function getAudit(id: string): Promise<AuditReport | null> {
   console.log('[getAudit] id:', id);
   console.log('[getAudit] SUPABASE_URL:', process.env.SUPABASE_URL ? 'set' : 'missing');
