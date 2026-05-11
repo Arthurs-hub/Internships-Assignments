@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 async function getAudit(id: string): Promise<AuditReport | null> {
-  const url = process.env.SUPABASE_URL;
+  const url = process.env.SUPABASE_URL || 'https://dfpzqambxazdpnryezwj.supabase.co';
   const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_ANON_KEY;
   if (!url || !key) { console.log('[getAudit] missing env vars'); return null; }
 
