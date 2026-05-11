@@ -11,7 +11,13 @@ export async function POST(req: NextRequest) {
         .from('audits')
         .insert([{ id: audit.id, data: JSON.parse(JSON.stringify(audit)) }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase insert error:', error);
+        throw error;
+      }
+      console.log('Audit saved:', audit.id);
+    } else {
+      console.warn('Supabase env vars missing in /api/audit');
     }
 
     return NextResponse.json({ success: true });
