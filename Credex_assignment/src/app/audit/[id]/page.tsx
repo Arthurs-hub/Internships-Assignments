@@ -15,7 +15,10 @@ async function getAudit(id: string): Promise<AuditReport | null> {
     { headers: { apikey: key, Authorization: `Bearer ${key}` }, cache: 'no-store' }
   );
   console.log('[getAudit] fetch url:', `${url}/rest/v1/audits?id=eq.${id}&select=data`);
-  const rows = await res.json();
+  console.log('[getAudit] status:', res.status);
+  const text = await res.text();
+  console.log('[getAudit] body:', text.slice(0, 200));
+  const rows = JSON.parse(text);
   console.log('[getAudit] rows:', JSON.stringify(rows));
   if (!Array.isArray(rows) || rows.length === 0) return null;
   const raw = rows[0].data;
