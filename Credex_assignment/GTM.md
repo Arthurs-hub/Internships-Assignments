@@ -4,10 +4,12 @@
 The ideal user for this tool isn't just "anyone in tech," but specifically the **Founding Engineer or CTO at a Seed-stage startup**. I chose this persona based on simple logic: in a 10-person company, the CTO is still the one who pays the bills and sets up the tools. They are currently overwhelmed with the "AI explosion"—every week a new tool (Cursor, Claude, v0) comes out, and they just buy it for the whole team because they need the speed. They don't have a finance department to tell them they are overspending. They care about their "burn rate" because it determines how many months the company has to live, but they are too busy to manually check if they should be on a Team plan or a Pro plan.
 
 ## Where They Hang Out (The Online Strategy)
-Instead of broad marketing, I would focus on where I personally spend time looking for tech news.
-- **X (Twitter)**: Tech Twitter is the fastest way to reach this audience. I would look for people complaining about "AI API bills" or discussing "Cursor vs. Copilot." By replying to these threads with a link to a *free* audit, we provide immediate value without being "salesy."
-- **Reddit & Indie Hackers**: Communities like r/saas or r/startups are full of people looking for ways to extend their runway. A simple, honest post like "I built a tool to see if you're overpaying for your AI stack" usually gets good traction because it's a utility, not an ad.
-- **Developer Newsletters**: Reaching out to curators of small but focused newsletters (like "TLDR" or specific AI newsletters) to feature us as a "Tool of the Week."
+Instead of broad marketing, I would focus on where this persona actually spends time:
+- **X (Twitter)**: Tech Twitter is the fastest way to reach this audience. Search for people complaining about "AI API bills" or discussing "Cursor vs. Copilot." Replying to these threads with a link to a *free* audit provides immediate value without being "salesy."
+- **Reddit**: r/SaaS, r/startups, r/ExperiencedDevs — communities full of people looking to extend runway. A post like "I built a tool to see if you're overpaying for your AI stack" gets traction because it's a utility, not an ad.
+- **Indie Hackers**: The #tools and #show-ih channels on the Indie Hackers community Slack.
+- **Discord servers**: Buildspace, Developer DAO, and AI-focused servers like Latent Space Discord where CTOs and founding engineers hang out.
+- **Developer Newsletters**: TLDR, Bytes.dev, and AI-specific newsletters like The Rundown AI for "Tool of the Week" features.
 
 ## Getting the First 100 Users (The $0 Budget Plan)
 Since I have no budget, I have to use manual effort:
