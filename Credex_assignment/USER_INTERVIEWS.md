@@ -22,8 +22,28 @@ This confirmed that the value proposition needs to be visible before any interac
 
 ---
 
-## Interview 2: [Pending]
-*Outreach sent. Will be updated upon response.*
+## Interview 2: Danil Karataev — Front-end Developer (React, TypeScript, Next.js)
+**Format:** LinkedIn DM outreach + Telegram follow-up | **Date:** 2026-05-11
+
+Danil is a front-end developer working with React, TypeScript, and Next.js — a close match to the target persona. I reached out via LinkedIn with the same message as Interview 1, sharing the live URL and asking 3 specific questions about the audit results page.
+
+**What happened:**
+Danil misread the message as a solicitation for paid AI agent services and responded:
+- "привет, я не оплачиваю агентов мне их оплачивает компания" ("Hi, I don't pay for agents, my company pays for them")
+
+After clarifying the request, he suggested a call instead of written feedback:
+- "мне кажется легче созвониться и обсудить" ("I think it's easier to hop on a call and discuss")
+- "напиши в телеграмме и как то в будние на следящей неделе обсудим чем я могу помочь" ("Write me on Telegram and we'll discuss next week on a weekday")
+
+I followed up on Telegram as requested. No response received.
+
+**The most surprising thing:**
+The initial misread — confusing an AI spend audit tool with a paid AI agent service — is a real signal. The product name and landing copy may not immediately communicate what the tool actually does. A developer with daily exposure to AI tools still needed clarification before engaging.
+
+**What it changed about my design:**
+This reinforced the need for a clearer hero section that immediately distinguishes "audit tool" from "AI service." I reviewed the headline and subheadline to make the value proposition more explicit on first glance.
+
+---
 
 ## Interview 3: [Pending]
 *Outreach sent. Will be updated upon response.*
