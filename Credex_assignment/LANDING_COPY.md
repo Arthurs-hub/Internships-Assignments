@@ -4,7 +4,7 @@
 Stop overpaying for your AI stack.
 
 ## Subheadline
-Get an instant, data-backed audit of your Cursor, Claude, and ChatGPT spend. Find better plans and exclusive credits in 2 minutes.
+Instant, data-backed audit of your AI tool spend. Find better plans and exclusive credits in 2 minutes.
 
 ## Primary CTA
 Run Free Audit

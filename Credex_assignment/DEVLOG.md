@@ -45,6 +45,16 @@
 - Drafted the core GTM (Go-To-Market) strategy and viral loop design.
 - Started outreach to potential users for interviews.
 
+**What I learned:**
+- framer-motion AnimatePresence requires `mode="wait"` to avoid layout conflicts when switching between modal views.
+- Lucide React icon imports must be exact named exports — wrong names cause silent build failures.
+
+**Blockers / what I'm stuck on:**
+- Email sharing via Resend only works for the account owner's address in sandbox mode. Need domain verification for production.
+
+**Plan for tomorrow:**
+- Day off.
+
 ## Day 4 — 2026-05-09
 **Hours worked:** 0
 **What I did:** Day off.
