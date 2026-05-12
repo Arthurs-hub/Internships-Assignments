@@ -18,7 +18,7 @@
 ## ChatGPT
 - **Plus**: $20/month — https://openai.com/chatgpt/pricing — verified 2026-05-06
 - **Team**: $25/user/month (billed annually) or $30/user/month (billed monthly) — https://openai.com/chatgpt/pricing — verified 2026-05-06
-- **Enterprise**: Contact Sales — https://openai.com/chatgpt/pricing — verified 2026-05-06
+- **Enterprise**: Custom pricing (Contact Sales). Audit engine uses $60/user/month as a conservative floor estimate for comparison logic only — https://openai.com/chatgpt/pricing — verified 2026-05-06
 
 ## Anthropic API (Direct)
 - **Pay-as-you-go**: Claude 3.5 Sonnet — $3/MTok input, $15/MTok output — https://www.anthropic.com/pricing — verified 2026-05-06
@@ -32,5 +32,7 @@
 - **Free**: $0/month — https://windsurf.com/pricing — verified 2026-05-06
 - **Pro**: $15/user/month — https://windsurf.com/pricing — verified 2026-05-06
 - **Teams**: $35/user/month — https://windsurf.com/pricing — verified 2026-05-06
-- **Pro**: $20/month — https://gemini.google.com/advanced — verified 2026-05-06
-- **Ultra**: Included in Advanced ($20/mo) — https://gemini.google.com/advanced — verified 2026-05-06
+
+## Gemini
+- **Free**: $0/month — https://gemini.google.com — verified 2026-05-06
+- **Advanced (Pro/Ultra)**: $20/month (includes Gemini Ultra) — https://gemini.google.com/advanced — verified 2026-05-06

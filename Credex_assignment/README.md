@@ -38,7 +38,7 @@ AI Spend Audit is a free tool designed to help startups and engineering managers
 2. **Hardcoded Audit Logic**: Decided against using AI for the core audit math to ensure 100% accuracy and defensibility. AI is reserved for the personalized summary.
 3. **Supabase for Backend**: Selected for its speed of development and built-in PostgreSQL, which allows for robust lead capture and future scalability.
 4. **LocalStorage for Persistence**: Implemented local persistence to ensure users don't lose progress if they accidentally refresh the form.
-5. **Shadcn/UI**: Used for a high-quality, professional aesthetic that builds trust with founders and finance personas.
+5. **Shadcn/UI Pattern**: UI components (`Button`, `Input`) were built from scratch following the shadcn/ui pattern — `forwardRef`, `cn` utility, Tailwind variants — without installing the shadcn package. This gives full control with zero extra dependencies.
 
 ## Live URL
 https://internships-assignments-tlwh.vercel.app

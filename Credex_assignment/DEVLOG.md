@@ -77,16 +77,24 @@
 - Added `force-dynamic` and `fetchCache: force-no-store` to audit page to prevent static caching.
 
 ## Day 7 — 2026-05-12
-**Hours worked:** 2
+**Hours worked:** 3
 **What I did:**
 - Added Interview 2 (Danil Karataev) to `USER_INTERVIEWS.md` — outreach result documented honestly.
 - Fixed CI workflow: corrected `node-of-version` typo to `node-version`, added `working-directory` for monorepo structure.
 - Updated DEVLOG Day 3 to remove reference to AI-generated interviews.
-- Final review of all documentation files for consistency.
+- Fixed incorrect technology references: replaced "Anthropic API" with "Google Gemini API" across README.md and ARCHITECTURE.md.
+- Fixed PRICING_DATA.md: moved Gemini pricing into its own `## Gemini` section (was incorrectly appended to Windsurf section).
+- Documented ChatGPT Enterprise $60 floor estimate used in audit engine with honest explanation in PRICING_DATA.md.
+- Added Abuse Protection section to ARCHITECTURE.md documenting honeypot implementation and rationale.
+- Clarified Resend sandbox limitation in ARCHITECTURE.md (delivery restricted to verified sender until domain verified).
+- Corrected ARCHITECTURE.md: removed SES (not integrated), clarified UI components are hand-written following shadcn/ui pattern without the package.
+- Fixed layout.tsx: replaced default Next.js placeholder title/description with real product metadata.
+- Final review of all documentation files for accuracy and consistency.
 - Awaiting third user interview response.
 
 **What I learned:**
 - CI workflows in monorepos require explicit `working-directory` or `defaults.run.working-directory` to run commands in the right folder.
+- Resend sandbox restricts delivery to the account owner's verified email until a custom domain is added.
 
 **Blockers / what I'm stuck on:**
 - Third user interview still pending.

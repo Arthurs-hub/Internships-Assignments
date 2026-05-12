@@ -10,7 +10,7 @@ graph TD
     Frontend -->|Generate Summary| LLM[Google Gemini API / Fallback]
     LLM -->|Personalized Text| Results
     Frontend -->|Lead Capture| Backend[Supabase / Postgres]
-    Backend -->|Send Email| EmailService[Resend / SES]
+    Backend -->|Send Email| EmailService[Resend]
     Frontend -->|Share| ShareURL[Public Audit URL]
 ```
 
@@ -25,10 +25,10 @@ graph TD
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router) for performance and SEO.
 - **Language**: TypeScript for type safety and maintainability.
-- **Styling**: Tailwind CSS + shadcn/ui for rapid, polished UI development.
+- **Styling**: Tailwind CSS with custom headless UI components (`Button`, `Input`) built from scratch using the shadcn/ui pattern (`cn` utility, `forwardRef`). No shadcn/ui package dependency.
 - **Database**: Supabase (Postgres) for easy lead storage and serverless functions.
-- **AI**: Google Gemini API for personalized audit summaries.
-- **Email**: Resend for transactional emails.
+- **AI**: Google Gemini API (`gemini-2.0-flash`) for personalized audit summaries. Fallback to templated summary if API key is absent.
+- **Email**: Resend for transactional emails (sandbox mode — delivery restricted to verified sender address until domain is verified).
 
 ## Scalability
 If this tool had to handle 10k audits/day:
@@ -36,3 +36,13 @@ If this tool had to handle 10k audits/day:
 - Use a message queue (e.g., Upstash QStash) for email delivery to handle spikes.
 - Optimize the audit engine to run efficiently on the edge.
 - Implement more aggressive rate limiting and abuse protection.
+
+## Abuse Protection
+Current implementation uses a **honeypot field** on the lead capture form. A hidden `<input type="text">` field is rendered in the DOM but hidden via CSS. Legitimate users never fill it; bots that auto-fill all fields will populate it. If the honeypot value is non-empty on submission, the request is silently rejected client-side (`if (!email || honeypot) return`).
+
+This approach was chosen over hCaptcha or rate limiting because:
+- Zero friction for real users (no CAPTCHA challenge)
+- No external dependency or API key required
+- Sufficient for MVP-stage abuse protection
+
+For production scale, adding server-side rate limiting (e.g., Upstash Redis) per IP would be the next step.
