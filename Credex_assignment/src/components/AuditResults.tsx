@@ -4,7 +4,7 @@ import React from 'react';
 import { AuditReport } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { TrendingDown, CheckCircle2, AlertCircle, ArrowRight, Share2, Mail } from 'lucide-react';
+import { TrendingDown, CheckCircle2, AlertCircle, Share2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ShareModal from './ShareModal';
 
@@ -17,8 +17,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
   const [loading, setLoading] = React.useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
 
-  const isOptimal = report.totalMonthlySavings < 100;
-  const highSavings = report.totalMonthlySavings > 500;
+  const isHighSavings = report.totalMonthlySavings > 500;
 
   const handleLeadCapture = async () => {
     if (!email || honeypot) return; // Silent fail if bot filled honeypot
@@ -166,7 +165,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
 
         <div className="p-4 bg-orange-50 border border-orange-100 rounded-xl">
           <p className="text-xs text-orange-800 leading-tight">
-            <strong>Insider tip:</strong> Users with over $500/mo in savings often qualify for additional 30% credits.
+            <strong>Insider tip:</strong> {isHighSavings ? 'You qualify for additional 30% credits via Credex.' : 'Even small optimizations compound over time.'}
           </p>
         </div>
       </div>
