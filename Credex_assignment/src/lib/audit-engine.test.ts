@@ -67,4 +67,26 @@ describe('Audit Engine', () => {
     expect(report.totalMonthlySavings).toBe(totalMonthly);
     expect(report.totalAnnualSavings).toBe(totalMonthly * 12);
   });
+
+  test('marks report as optimal when total savings < $100', () => {
+    const input: AuditInput = {
+      tools: [{ tool: 'Cursor', plan: 'Pro', monthlySpend: 20, seats: 1 }],
+      teamSize: 1,
+      primaryUseCase: 'coding',
+    };
+    const report = runAudit(input);
+    expect(report.totalMonthlySavings).toBe(0);
+    expect(report.isOptimal).toBe(true);
+  });
+
+  test('suggests alternative tool when plan is optimal and use case matches', () => {
+    const input: AuditInput = {
+      tools: [{ tool: 'GitHub Copilot', plan: 'Individual', monthlySpend: 10, seats: 1 }],
+      teamSize: 1,
+      primaryUseCase: 'coding',
+    };
+    const report = runAudit(input);
+    const rec = report.recommendations.find(r => r.tool === 'GitHub Copilot');
+    expect(rec?.alternativeTool).toBe('Windsurf Pro');
+  });
 });

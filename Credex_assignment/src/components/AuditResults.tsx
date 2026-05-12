@@ -18,6 +18,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
   const [isShareModalOpen, setIsShareModalOpen] = React.useState(false);
 
   const isHighSavings = report.totalMonthlySavings > 500;
+  const isOptimal = report.isOptimal;
 
   const handleLeadCapture = async () => {
     if (!email || honeypot) return; // Silent fail if bot filled honeypot
@@ -52,45 +53,67 @@ export default function AuditResults({ report }: { report: AuditReport }) {
       {/* Left Column: Audit Content */}
       <div className="lg:col-span-8 space-y-8">
         {/* Hero Savings Card */}
-        <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-8 rounded-2xl shadow-xl text-center"
-        >
-          <TrendingDown className="h-12 w-12 mx-auto mb-4 opacity-80" />
-          <h2 className="text-xl font-medium opacity-90 mb-2">Total Potential Savings</h2>
-          <div className="flex justify-center items-baseline gap-4 mb-6">
-            <span className="text-6xl font-bold">${report.totalMonthlySavings.toLocaleString()}</span>
-            <span className="text-2xl opacity-80">/mo</span>
-          </div>
-          <div className="bg-white/10 rounded-full py-2 px-6 inline-block backdrop-blur-sm border border-white/20">
-            That&apos;s <span className="font-bold text-green-300">${report.totalAnnualSavings.toLocaleString()}</span> every year.
-          </div>
-        </motion.div>
+        {isOptimal ? (
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-gradient-to-br from-green-600 to-emerald-700 text-white p-8 rounded-2xl shadow-xl text-center"
+          >
+            <CheckCircle2 className="h-12 w-12 mx-auto mb-4 opacity-80" />
+            <h2 className="text-2xl font-bold mb-2">You&apos;re spending well.</h2>
+            <p className="text-lg opacity-90 max-w-md mx-auto">
+              Your current AI stack looks optimized for your team size and use case. No significant overspend detected.
+            </p>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-8 rounded-2xl shadow-xl text-center"
+          >
+            <TrendingDown className="h-12 w-12 mx-auto mb-4 opacity-80" />
+            <h2 className="text-xl font-medium opacity-90 mb-2">Total Potential Savings</h2>
+            <div className="flex justify-center items-baseline gap-4 mb-6">
+              <span className="text-6xl font-bold">${report.totalMonthlySavings.toLocaleString()}</span>
+              <span className="text-2xl opacity-80">/mo</span>
+            </div>
+            <div className="bg-white/10 rounded-full py-2 px-6 inline-block backdrop-blur-sm border border-white/20">
+              That&apos;s <span className="font-bold text-green-300">${report.totalAnnualSavings.toLocaleString()}</span> every year.
+            </div>
+          </motion.div>
+        )}
 
         {/* Tool Breakdown */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-gray-900">Breakdown by Tool</h3>
           <div className="grid gap-4">
             {report.recommendations.map((rec, i) => (
-              <div key={i} className="bg-white border border-gray-200 p-6 rounded-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-gray-900">{rec.tool}</span>
-                    <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">{rec.currentPlan}</span>
+              <div key={i} className="bg-white border border-gray-200 p-6 rounded-xl flex flex-col gap-4">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-gray-900">{rec.tool}</span>
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded uppercase">{rec.currentPlan}</span>
+                    </div>
+                    <p className="text-gray-600 text-sm">{rec.reason}</p>
                   </div>
-                  <p className="text-gray-600 text-sm">{rec.reason}</p>
+                  <div className="flex items-center gap-6 shrink-0">
+                    <div className="text-right">
+                      <p className="text-xs text-gray-500 uppercase font-medium">Recommendation</p>
+                      <p className="font-semibold text-blue-600">{rec.recommendedAction}</p>
+                    </div>
+                    <div className="w-24 text-right">
+                      <p className="text-xs text-gray-500 uppercase font-medium">Savings</p>
+                      <p className="font-bold text-green-600">${rec.monthlySavings.toLocaleString()}/mo</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-6">
-                  <div className="text-right">
-                    <p className="text-xs text-gray-500 uppercase font-medium">Recommendation</p>
-                    <p className="font-semibold text-blue-600">{rec.recommendedAction}</p>
+                {rec.alternativeTool && (
+                  <div className="bg-amber-50 border border-amber-100 rounded-lg px-4 py-3 text-sm">
+                    <span className="font-semibold text-amber-800">Alternative: </span>
+                    <span className="text-amber-700">{rec.alternativeTool} — {rec.alternativeReason}</span>
                   </div>
-                  <div className="w-24 text-right">
-                    <p className="text-xs text-gray-500 uppercase font-medium">Savings</p>
-                    <p className="font-bold text-green-600">${rec.monthlySavings.toLocaleString()}/mo</p>
-                  </div>
-                </div>
+                )}
               </div>
             ))}
           </div>
@@ -120,8 +143,14 @@ export default function AuditResults({ report }: { report: AuditReport }) {
           ) : (
             <div className="space-y-4">
               <div className="text-center lg:text-left">
-                <h3 className="text-lg font-bold text-gray-900">Capture Savings</h3>
-                <p className="text-sm text-gray-600">Get your full report and Credex credits.</p>
+                <h3 className="text-lg font-bold text-gray-900">
+                  {isOptimal ? 'Stay in the loop' : 'Capture Savings'}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {isOptimal
+                    ? 'Notify me when new optimizations apply to my stack.'
+                    : 'Get your full report and Credex credits.'}
+                </p>
               </div>
               
               <div className="space-y-3">
@@ -143,12 +172,12 @@ export default function AuditResults({ report }: { report: AuditReport }) {
                 />
                 <input type="text" className="hidden" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
                 
-                <Button 
+                <Button
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white"
                   onClick={handleLeadCapture}
                   disabled={loading}
                 >
-                  {loading ? 'Sending...' : 'Book Consultation'}
+                  {loading ? 'Sending...' : isOptimal ? 'Notify Me' : 'Book Consultation'}
                 </Button>
               </div>
             </div>

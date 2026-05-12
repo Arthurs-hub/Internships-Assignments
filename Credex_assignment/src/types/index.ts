@@ -32,6 +32,8 @@ export interface AuditRecommendation {
   recommendedAction: string;
   monthlySavings: number;
   reason: string;
+  alternativeTool?: string;
+  alternativeReason?: string;
 }
 
 export interface AuditReport {
@@ -40,6 +42,7 @@ export interface AuditReport {
   recommendations: AuditRecommendation[];
   totalMonthlySavings: number;
   totalAnnualSavings: number;
+  isOptimal: boolean;
   personalizedSummary?: string;
   createdAt: string;
 }
