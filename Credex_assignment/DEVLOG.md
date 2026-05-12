@@ -19,6 +19,9 @@
 **Blockers / what I'm stuck on:**
 - None so far. Initial setup is complete.
 
+**Plan for tomorrow:**
+- Enhance lead capture form, integrate Resend, implement share functionality, and polish UI.
+
 ## Day 2 — 2026-05-07
 **Hours worked:** 2
 **What I did:**
@@ -35,6 +38,9 @@
 
 **Blockers / what I'm stuck on:**
 - Email delivery issues during testing (resolved by clarifying Resend's sandbox limits).
+
+**Plan for tomorrow:**
+- Refactor audit engine, implement Share Modal with social integrations, draft GTM strategy, start user outreach.
 
 ## Day 3 — 2026-05-08
 **Hours worked:** 3.5
@@ -85,6 +91,16 @@
 - Fixed Gemini model from deprecated `gemini-1.5-flash` to `gemini-2.0-flash`.
 - Fixed audit storage to save as proper JSON blob.
 - Added `force-dynamic` and `fetchCache: force-no-store` to audit page to prevent static caching.
+
+**What I learned:**
+- Supabase PostgREST JS client does not return rows when using the new JWT key system — direct REST fetch with service_role key is required.
+- Next.js static caching must be explicitly disabled on dynamic pages with `force-dynamic`.
+
+**Blockers / what I'm stuck on:**
+- Two user interviews completed, third still pending.
+
+**Plan for tomorrow:**
+- Add second interview result, fix CI workflow, final documentation review.
 
 ## Day 7 — 2026-05-12
 **Hours worked:** 3

@@ -29,6 +29,6 @@ I also found that while the AI is great at writing code, it sometimes struggles 
 ## 5. Self-Rating: Honest Reflection
 - **Discipline (9/10)**: I maintained a rigorous schedule, ensuring that commits were spread across the week and that the `DEVLOG.md` was updated daily. I treated this like a real 9-to-5 job.
 - **Code Quality (8/10)**: The code is clean, typed with TypeScript, and follows modern React patterns. However, given more time, I would abstract some of the larger components into even smaller, more reusable primitives.
-- **Design Sense (7/10)**: While the app is clean and professional thanks to shadcn/ui and Tailwind, I am not a professional designer. The UI is functional and clear, but it lacks that "top 1%" polish found on high-end SaaS products.
+- **Design Sense (7/10)**: While the app is clean and professional thanks to Tailwind CSS and custom components, I am not a professional designer. The UI is functional and clear, but it lacks that "top 1%" polish found on high-end SaaS products.
 - **Problem Solving (9/10)**: I successfully navigated several technical hurdles, from deployment issues to complex state management, without getting stuck for more than a couple of hours.
 - **Entrepreneurial Thinking (10/10)**: This is where I think I excelled. I didn't just build a "feature"; I built a lead-generation asset. Every design choice, from the email gate to the "Credex Credits" call-to-action, was made with business growth in mind.
