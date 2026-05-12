@@ -136,7 +136,7 @@ export default function AuditResults({ report }: { report: AuditReport }) {
         <div className="bg-white border border-gray-200 p-6 rounded-2xl shadow-sm">
           {submitted ? (
             <div className="text-center py-4">
-              <CheckCircle2 className="h-10 w-12 text-green-600 mx-auto mb-3" />
+              <CheckCircle2 className="h-10 w-10 text-green-600 mx-auto mb-3" />
               <h3 className="font-bold text-green-900">Report Sent!</h3>
               <p className="text-sm text-green-800 mt-2">Check your inbox for the breakdown.</p>
             </div>
