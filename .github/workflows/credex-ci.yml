@@ -3,12 +3,8 @@ name: Credex CI
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'Credex_assignment/**'
   pull_request:
     branches: [ main ]
-    paths:
-      - 'Credex_assignment/**'
 
 jobs:
   build:
