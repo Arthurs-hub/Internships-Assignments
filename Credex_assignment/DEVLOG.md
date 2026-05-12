@@ -39,11 +39,11 @@
 ## Day 3 — 2026-05-08
 **Hours worked:** 3.5
 **What I did:**
-- Conducted 3 deep-dive user interviews (CTO, Solo Founder, Manager).
-- Refactored Audit Engine logic to include "Consolidation" suggestions based on interview feedback.
+- Refactored Audit Engine logic to include "Consolidation" suggestions.
 - Added data privacy and management benefits to the recommendation UI.
 - Implemented interactive Share Modal with social media integrations (LinkedIn, X, Facebook, Email).
 - Drafted the core GTM (Go-To-Market) strategy and viral loop design.
+- Started outreach to potential users for interviews.
 
 ## Day 4 — 2026-05-09
 **Hours worked:** 0
@@ -77,10 +77,20 @@
 - Added `force-dynamic` and `fetchCache: force-no-store` to audit page to prevent static caching.
 
 ## Day 7 — 2026-05-12
-**Hours worked:** 1
+**Hours worked:** 2
 **What I did:**
-- Final sanity check of the Vercel deployment.
-- Verified all external integrations (Supabase, Resend, Gemini).
-- Prepared the final submission repository.
+- Added Interview 2 (Danil Karataev) to `USER_INTERVIEWS.md` — outreach result documented honestly.
+- Fixed CI workflow: corrected `node-of-version` typo to `node-version`, added `working-directory` for monorepo structure.
+- Updated DEVLOG Day 3 to remove reference to AI-generated interviews.
+- Final review of all documentation files for consistency.
+- Awaiting third user interview response.
 
-**Final Status:** All mandatory and bonus features delivered. Project ready for review.
+**What I learned:**
+- CI workflows in monorepos require explicit `working-directory` or `defaults.run.working-directory` to run commands in the right folder.
+
+**Blockers / what I'm stuck on:**
+- Third user interview still pending.
+
+**Plan for tomorrow:**
+- Add third interview once response arrives.
+- Final submission.

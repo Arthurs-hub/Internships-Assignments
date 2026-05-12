@@ -9,14 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Credex_assignment
 
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-of-version: '20'
+        node-version: '20'
         cache: 'npm'
+        cache-dependency-path: Credex_assignment/package-lock.json
     - run: npm ci
     - run: npm run lint
     - run: npm test

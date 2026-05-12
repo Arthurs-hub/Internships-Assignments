@@ -20,7 +20,7 @@ Secondly, I would implement **Benchmarking Mode**. By collecting anonymized data
 Lastly, I would build a **CSV Statement Importer**. Currently, users have to manually input their tools. Allowing them to upload a bank statement or a Brex export would remove the biggest friction point. I would use an LLM to categorize the line items (e.g., identifying that "OPENAI * TEMP" is a ChatGPT subscription) and automatically generate the audit. This would transform the tool from a 5-minute task into a 30-second "magic" experience.
 
 ## 4. Use of AI Tools: Collaboration and Verification
-Throughout this project, I used **Cursor and Claude 3.5 Sonnet** as my primary development partners. They were incredibly efficient at scaffolding the UI components and helping me set up the initial Next.js boilerplate. For example, the complex multi-step form and the responsive Tailwind layouts were built significantly faster with AI assistance. 
+Throughout this project, I used **Amazon Q Developer and Cursor** as my primary development partners. They were incredibly efficient at scaffolding the UI components and helping me set up the initial Next.js boilerplate. For example, the complex multi-step form and the responsive Tailwind layouts were built significantly faster with AI assistance. 
 
 However, I maintained a "Trust but Verify" approach. I didn't trust the AI with the actual pricing data or the specific logic of the audit engine. This was a wise choice, as I caught the AI making several mistakes. At one point, it suggested a pricing model for GitHub Copilot Enterprise that was based on outdated 2023 information. I caught this because I was cross-referencing every AI suggestion with official pricing pages. 
 

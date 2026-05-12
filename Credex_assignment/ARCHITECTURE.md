@@ -18,7 +18,7 @@ graph TD
 1. **Input**: User enters AI tool usage via a multi-step form.
 2. **Persistence**: Data is saved to `localStorage` to persist across reloads.
 3. **Audit**: The `AuditEngine` processes the data using hardcoded pricing rules and usage-fit logic.
-4. **AI Summary**: Data is sent to an edge function to generate a personalized summary using Claude (Anthropic).
+4. **AI Summary**: Data is sent to an edge function to generate a personalized summary using Google Gemini API.
 5. **Storage**: Audit results and lead info are stored in Supabase.
 6. **Output**: User receives a detailed report and a unique shareable URL.
 
