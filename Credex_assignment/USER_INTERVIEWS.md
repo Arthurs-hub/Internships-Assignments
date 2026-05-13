@@ -45,5 +45,19 @@ This reinforced the need for a clearer hero section that immediately distinguish
 
 ---
 
-## Interview 3: [Pending]
-*Outreach sent. Will be updated upon response.*
+## Interview 3: Gheorghi Marcov — Qt & C++ Developer, IoT & Embedded Systems, AROBS Transilvania Software
+**Format:** Telegram DM outreach | **Date:** 2026-05-07
+
+Gheorghi is a Qt/C++ and IoT developer at a software company in Moldova. While not a direct AI-tool power user, he represents a technical professional who would realistically encounter AI spend decisions at a company level. I reached out via Telegram on May 7th with a detailed message explaining the project, sharing the live URL and GitHub repo, and asking him to spend ~2 minutes on the tool and answer 3 specific questions:
+1. How clear are the savings breakdowns by numbers and charts?
+2. Does the Credex Insider Credits block feel trustworthy?
+3. What's missing that would make you actually want to use this tool in the future?
+
+**What happened:**
+Gheorghi did not respond. No reply was received via Telegram, and no follow-up call was made. The message was delivered but left unread or ignored.
+
+**The most surprising thing:**
+Gheorghi is a technical professional at a software company — exactly the kind of person who might encounter AI tooling decisions at work. The complete non-response, even after a detailed and personal message with a direct link, suggests that the outreach framing itself may be the barrier. A message that opens with "I need your help for an internship assignment" may read as a favour request rather than a genuine product test, reducing the perceived value of engaging.
+
+**What it changed about my design:**
+This third non-response in a row reinforced a pattern: cold outreach asking people to "test a tool" has very high friction regardless of how clear the ask is. It confirmed that the real viral loop for this product cannot rely on manual outreach — it has to be self-serve and immediately rewarding. The value must be obvious within 5 seconds of landing on the page, before any interaction is required. I strengthened the hero section copy to front-load the savings promise rather than explain the tool mechanics first.

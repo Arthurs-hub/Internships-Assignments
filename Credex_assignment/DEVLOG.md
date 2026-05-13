@@ -116,15 +116,14 @@
 - Corrected ARCHITECTURE.md: removed SES (not integrated), clarified UI components are hand-written following shadcn/ui pattern without the package.
 - Fixed layout.tsx: replaced default Next.js placeholder title/description with real product metadata.
 - Final review of all documentation files for accuracy and consistency.
-- Awaiting third user interview response.
+- Added Interview 3 (Gheorghi Marcov) to `USER_INTERVIEWS.md` — outreach sent 2026-05-07 via Telegram, no response received, documented honestly.
 
 **What I learned:**
 - CI workflows in monorepos require explicit `working-directory` or `defaults.run.working-directory` to run commands in the right folder.
 - Resend sandbox restricts delivery to the account owner's verified email until a custom domain is added.
 
 **Blockers / what I'm stuck on:**
-- Third user interview still pending.
+- None. All three user interviews documented.
 
 **Plan for tomorrow:**
-- Add third interview once response arrives.
 - Final submission.
